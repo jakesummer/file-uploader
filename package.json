@@ -1,0 +1,41 @@
+{
+  "name": "file-uploader",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/jakesummer/file-uploader#readme",
+  "bugs": {
+    "url": "https://github.com/jakesummer/file-uploader/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakesummer/file-uploader.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "src/server/server.js",
+  "scripts": {
+    "dev": "node --watch --watch-path=src src/server/server.js",
+    "start": "NODE_ENV=production node src/server/server.js",
+    "build": "vite build",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@awesome.me/webawesome": "^3.10.0",
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.7.0",
+    "globals": "^17.7.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.0.8",
+    "prettier": "3.9.5",
+    "vite": "^8.1.4"
+  },
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^5.2.1",
+    "vite-express": "^0.22.1"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  }
+}
