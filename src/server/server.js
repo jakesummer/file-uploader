@@ -10,7 +10,7 @@ import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 
 const __dirname = import.meta.dirname;
 
-const envPath = path.join(__dirname, "..", ".env");
+const envPath = path.join(__dirname, "../..", ".env");
 if (existsSync(envPath)) {
   loadEnvFile(envPath);
 }
