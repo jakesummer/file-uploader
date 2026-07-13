@@ -1,0 +1,14 @@
+.auth-card {
+  h1 {
+    font-size: var(--wa-font-size-2xl);
+  }
+
+  width: 50vw;
+  padding: 0.5rem 1rem;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}

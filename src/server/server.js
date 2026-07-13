@@ -4,6 +4,7 @@ import path from "path";
 import session from "express-session";
 import prisma from "../../db/prisma.js";
 import passport from "passport";
+import authRouter from "./routes/authRouter.js";
 import { loadEnvFile } from "process";
 import { existsSync } from "fs";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
@@ -43,6 +44,8 @@ import "../../config/passport.js";
 
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(authRouter);
 
 const PORT = process.env.PORT || 3000;
 ViteExpress.listen(app, PORT, () =>

@@ -1,0 +1,13 @@
+<%- include("partials/header") %>
+
+  <wa-card class="auth-card"  appearance="filled">
+    <h1>Create an Account</h1>
+    <form action="sign-up" method="post">
+      <wa-input label="Username"></wa-input>
+      <wa-input type="password" label="Password"></wa-input>
+      <wa-input type="password" label="Confirm Password"></wa-input>
+      <wa-button type="submit" variant="brand" size="l">Sign Up</wa-button>
+    </form>
+  </wa-card>
+
+<%- include("partials/footer") %>
