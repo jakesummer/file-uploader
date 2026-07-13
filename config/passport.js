@@ -1,9 +1,6 @@
 import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
-import {
-  getUserById,
-  getUserByUsername,
-} from "../../../db/queries/userQueries.js";
+import { getUserById, getUserByUsername } from "../db/queries/userQueries.js";
 import { verifyPassword } from "../lib/passwordUtils.js";
 
 passport.use(
