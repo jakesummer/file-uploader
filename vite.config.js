@@ -6,7 +6,8 @@ export default defineConfig({
     emptyOutDir: true,
     rolldownOptions: {
       input: {
-        main: "src/client/main.js",
+        main: "src/client/entries/dashboard.js",
+        auth: "src/client/entries/auth.js",
       },
       output: {
         entryFileNames: "assets/[name].js",
