@@ -4,6 +4,7 @@ import {
   getUserById,
   getUserByUsername,
 } from "../../../db/queries/userQueries.js";
+import { verifyPassword } from "../lib/passwordUtils.js";
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -14,8 +15,7 @@ passport.use(
         return done(null, false, { message: "Incorrect username" });
       }
 
-      // eslint-disable-next-line no-undef
-      const match = await verifyPassword(password, user.password); // TODO
+      const match = await verifyPassword(password, user.password);
       if (!match) {
         return done(null, false, { message: "Incorrect password" });
       }
