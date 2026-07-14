@@ -3,9 +3,9 @@
 <wa-card class="auth-card" appearance="filled">
   <h1>Create an Account</h1>
   <form action="sign-up" method="post">
-    <wa-input label="Username"></wa-input>
-    <wa-input type="password" label="Password"></wa-input>
-    <wa-input type="password" label="Confirm Password"></wa-input>
+    <wa-input label="Username" id="username" name="username" required minlength="2" maxlength="16"></wa-input>
+    <wa-input type="password" label="Password" id="password" name="password" required minlength="8" maxlength="16"></wa-input>
+    <wa-input type="password" label="Confirm Password" id="confirm-password" required minlength="8" maxlength="16"></wa-input>
     <wa-button type="submit" variant="brand" size="l">Sign Up</wa-button>
   </form>
 </wa-card>
