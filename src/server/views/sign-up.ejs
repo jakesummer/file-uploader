@@ -3,8 +3,38 @@
 <wa-card class="auth-card" appearance="filled">
   <h1>Create an Account</h1>
   <form action="sign-up" method="post">
-    <wa-input label="Username" id="username" name="username" required minlength="2" maxlength="16"></wa-input>
-    <wa-input type="password" label="Password" id="password" name="password" required minlength="8" maxlength="16"></wa-input>
+   <wa-input
+      label="Username"
+      class="<%= locals.usernameErrorMsg ? "invalid" : "" %>"
+      value="<%= locals.username %>"
+      hint="<%= locals.usernameErrorMsg %>"
+      id="username"
+      name="username"
+      required
+      minlength="2"
+      maxlength="16"
+    >
+      <% if (locals.usernameErrorMsg) { %>
+      <wa-icon name="circle-exclamation" slot="end" class="form-invalid-icon"></wa-icon>
+      <% } %>
+    </wa-input>
+  
+    <wa-input 
+      type="password" 
+      label="Password"
+      class="<%= locals.passwordErrorMsg ? "invalid" : "" %>"
+      hint="<%= locals.passwordErrorMsg %>" 
+      id="password" 
+      name="password" 
+      required 
+      minlength="8" 
+      maxlength="16"
+    >
+      <% if (locals.passwordErrorMsg) { %>
+       <wa-icon name="circle-exclamation" slot="end" class="form-invalid-icon"></wa-icon>
+      <% } %>
+    </wa-input>
+    
     <wa-input type="password" label="Confirm Password" id="confirm-password" required minlength="8" maxlength="16"></wa-input>
     <wa-button type="submit" variant="brand" size="l">Sign Up</wa-button>
   </form>
