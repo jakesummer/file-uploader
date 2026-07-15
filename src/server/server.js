@@ -1,3 +1,4 @@
+import "./config/loadEnv.js";
 import express from "express";
 import ViteExpress from "vite-express";
 import path from "path";
@@ -5,16 +6,9 @@ import session from "express-session";
 import prisma from "./db/prisma.js";
 import passport from "passport";
 import authRouter from "./routes/authRouter.js";
-import { loadEnvFile } from "process";
-import { existsSync } from "fs";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 
 const __dirname = import.meta.dirname;
-
-const envPath = path.join(__dirname, "../..", ".env");
-if (existsSync(envPath)) {
-  loadEnvFile(envPath);
-}
 
 const app = express();
 
