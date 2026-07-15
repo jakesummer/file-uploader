@@ -1,33 +1,31 @@
-const USERNAME_PATTERN = /^[a-zA-Z0-9_.]+$/;
-const PASSWORD_PATTERN = /^[a-zA-Z0-9_.[\]{}()!@#$%^&*+\-=\\/|:;'",<>?`~]+$/;
-
 const username = document.getElementById("username");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirm-password");
 
-function setError(input, message) {
+function updateInputUi(input, errors) {
   input.querySelectorAll(".form-invalid-icon").forEach((i) => i.remove());
 
-  input.setCustomValidity(message);
-  input.hint = message;
+  if (errors.length > 0) {
+    const message = errors[0];
 
-  const icon = Object.assign(document.createElement("wa-icon"), {
-    name: "circle-exclamation",
-    slot: "end",
-    className: "form-invalid-icon",
-  });
-  input.appendChild(icon);
-  input.classList.add("invalid");
+    input.setCustomValidity(message);
+    input.hint = message;
+
+    const icon = Object.assign(document.createElement("wa-icon"), {
+      name: "circle-exclamation",
+      slot: "end",
+      className: "form-invalid-icon",
+    });
+    input.appendChild(icon);
+    input.classList.add("invalid");
+  } else {
+    input.setCustomValidity("");
+    input.classList.remove("invalid");
+    input.hint = "";
+  }
 }
 
-function removeError(input) {
-  input.querySelectorAll(".form-invalid-icon").forEach((i) => i.remove());
-  input.setCustomValidity("");
-  input.classList.remove("invalid");
-  input.hint = "";
-}
-
-function verifyInputLength(input) {
+function getLengthError(input) {
   const MAX_LENGTH = input.maxlength;
   const MIN_LENGTH = input.minlength;
   const value = input.value;
@@ -35,46 +33,67 @@ function verifyInputLength(input) {
   const errMsg = `${input.label} must be between ${MIN_LENGTH} and ${MAX_LENGTH} characters!  `;
 
   if (value.length > MAX_LENGTH || value.length < MIN_LENGTH) {
-    setError(input, errMsg);
-  } else {
-    removeError(input);
+    return errMsg;
   }
+  return null;
 }
 
-function verifyInputPattern(input, regex) {
-  let errMsg =
-    "Password can only contain letters, numbers, and special characters!";
+function getPatternError(input, regex) {
+  if (regex.test(input.value)) return null;
+
   if (input === username) {
-    errMsg =
-      "Username can only contain letters, numbers, underscores, and periods!";
+    return "Username can only contain letters, numbers, underscores, and periods!";
   }
-
-  if (!regex.test(input.value)) {
-    setError(input, errMsg);
-  } else {
-    removeError(input);
-  }
+  return "Password can only contain letters, numbers, and special characters!";
 }
 
-function verifySamePasswords() {
+function getSamePasswordsError() {
   if (confirmPassword.value && confirmPassword.value != password.value) {
-    setError(confirmPassword, "Passwords must match!");
-  } else {
-    removeError(confirmPassword);
+    return "Passwords must match!";
   }
+  return null;
 }
 
-username.addEventListener("input", () => {
-  verifyInputLength(username);
-  verifyInputPattern(username, USERNAME_PATTERN);
-});
+function validateUsername() {
+  const pattern = /^[a-zA-Z0-9_.]+$/;
+  const errors = [];
 
-password.addEventListener("input", () => {
-  verifyInputLength(password);
-  verifyInputPattern(password, PASSWORD_PATTERN);
-  verifySamePasswords();
-});
+  const lengthErr = getLengthError(username);
+  const patternErr = getPatternError(username, pattern);
 
-confirmPassword.addEventListener("input", () => {
-  verifySamePasswords();
-});
+  if (lengthErr) errors.push(lengthErr);
+  if (patternErr) errors.push(patternErr);
+
+  updateInputUi(username, errors);
+}
+
+function validatePassword() {
+  const pattern = /^[a-zA-Z0-9_.[\]{}()!@#$%^&*+\-=\\/|:;'",<>?`~]+$/;
+
+  const errors = [];
+
+  const lengthErr = getLengthError(password);
+  const patternErr = getPatternError(password, pattern);
+
+  if (lengthErr) errors.push(lengthErr);
+  if (patternErr) errors.push(patternErr);
+
+  updateInputUi(password, errors);
+
+  validateConfirmPassword();
+}
+
+function validateConfirmPassword() {
+  const errors = [];
+  const samePasswordErr = getSamePasswordsError();
+
+  if (samePasswordErr) errors.push(samePasswordErr);
+
+  updateInputUi(confirmPassword, errors);
+}
+
+username.addEventListener("input", validateUsername);
+
+password.addEventListener("input", validatePassword);
+
+confirmPassword.addEventListener("input", validateConfirmPassword);
