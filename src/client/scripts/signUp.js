@@ -1,3 +1,6 @@
+const USERNAME_PATTERN = /^[a-zA-Z0-9_.]+$/;
+const PASSWORD_PATTERN = /^[a-zA-Z0-9_.[\]{}()!@#$%^&*+\-=\\/|:;'",<>?`~]+$/;
+
 const username = document.getElementById("username");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirm-password");
@@ -38,11 +41,23 @@ function verifyInputLength(input) {
   }
 }
 
+function verifyInputPattern(input, regex) {
+  let errMsg =
+    "Password can only contain letters, numbers, and special characters!";
+  if (input === username) {
+    errMsg =
+      "Username can only contain letters, numbers, underscores, and periods!";
+  }
+
+  if (!regex.test(input.value)) {
+    setError(input, errMsg);
+  } else {
+    removeError(input);
+  }
+}
+
 function verifySamePasswords() {
-  if (
-    confirmPassword.value.length > 0 &&
-    confirmPassword.value != password.value
-  ) {
+  if (confirmPassword.value && confirmPassword.value != password.value) {
     setError(confirmPassword, "Passwords must match!");
   } else {
     removeError(confirmPassword);
@@ -51,10 +66,12 @@ function verifySamePasswords() {
 
 username.addEventListener("input", () => {
   verifyInputLength(username);
+  verifyInputPattern(username, USERNAME_PATTERN);
 });
 
 password.addEventListener("input", () => {
   verifyInputLength(password);
+  verifyInputPattern(password, PASSWORD_PATTERN);
   verifySamePasswords();
 });
 
