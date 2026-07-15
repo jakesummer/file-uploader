@@ -42,7 +42,7 @@ export const signUpPost = [
     try {
       const { username, password } = matchedData(req);
       const hashedPassword = await hashPassword(password);
-      await createNewUser(username, hashedPassword);
+      await createNewUser(username.toLowerCase(), hashedPassword);
       res.send("success!!");
     } catch (err) {
       next(err);
