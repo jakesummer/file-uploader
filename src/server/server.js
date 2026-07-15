@@ -2,7 +2,7 @@ import express from "express";
 import ViteExpress from "vite-express";
 import path from "path";
 import session from "express-session";
-import prisma from "../../db/prisma.js";
+import prisma from "./db/prisma.js";
 import passport from "passport";
 import authRouter from "./routes/authRouter.js";
 import { loadEnvFile } from "process";
@@ -40,7 +40,7 @@ app.use(
   }),
 );
 
-import "../../config/passport.js";
+import "./config/passport.js";
 
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
