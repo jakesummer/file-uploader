@@ -11,3 +11,7 @@ export async function getUserById(id) {
     where: { id },
   });
 }
+
+export async function createNewUser(username, password) {
+  await prisma.user.create({ data: { username, password } });
+}
