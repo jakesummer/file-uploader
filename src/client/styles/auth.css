@@ -53,3 +53,11 @@ wa-input.valid {
     color: var(--wa-color-success-70);
   }
 }
+
+.error-messages {
+  color: var(--wa-color-danger);
+  list-style-type: none;
+  margin-left: -1rem;
+  margin-top: -1rem;
+  font-weight: bold;
+}

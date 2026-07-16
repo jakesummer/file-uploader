@@ -6,38 +6,36 @@
   <form action="sign-in" method="post">
    <wa-input
       label="Username"
-      class="<%= locals.usernameErrorMsg ? "invalid" : "" %>"
-      value="<%= locals.username %>"
-      hint="<%= locals.usernameErrorMsg %>"
       id="username-sign-in"
       name="username"
       required
       minlength="2"
       maxlength="16"
     >
-      <% if (locals.usernameErrorMsg) { %>
-      <wa-icon name="circle-exclamation" slot="end" class="form-invalid-icon"></wa-icon>
-      <% } %>
     </wa-input>
   
     <wa-input 
       type="password" 
       label="Password"
-      class="<%= locals.passwordErrorMsg ? "invalid" : "" %>"
-      hint="<%= locals.passwordErrorMsg %>" 
       id="password-sign-in" 
       name="password" 
       required 
       minlength="8" 
       maxlength="16"
     >
-      <% if (locals.passwordErrorMsg) { %>
-       <wa-icon name="circle-exclamation" slot="end" class="form-invalid-icon"></wa-icon>
-      <% } %>
     </wa-input>
+
+    <% if (locals.errorMessages?.length > 0) { %>
+      <ul class="error-messages">
+        <% errorMessages.forEach(msg => { %>
+          <li><%= msg %></li>
+        <% }); %>
+      </ul>
+    <% } %>
     
     <wa-button type="submit" variant="brand" size="l">Sign In</wa-button>
   </form>
+
 </wa-card>
 
 <%- include("partials/auth-footer") %>

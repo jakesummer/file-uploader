@@ -9,12 +9,12 @@ passport.use(
       const user = await getUserByUsername(username);
 
       if (!user) {
-        return done(null, false, { message: "Incorrect username" });
+        return done(null, false, { message: "Incorrect username!" });
       }
 
       const match = await verifyPassword(password, user.password);
       if (!match) {
-        return done(null, false, { message: "Incorrect password" });
+        return done(null, false, { message: "Incorrect password!" });
       }
 
       return done(null, user);

@@ -1,3 +1,4 @@
+import passport from "passport";
 import { body, matchedData, validationResult } from "express-validator";
 import { createNewUser, getUserByUsername } from "../db/queries/userQueries.js";
 import { hashPassword } from "../lib/passwordUtils.js";
@@ -58,5 +59,17 @@ export const signUpPost = [
 ];
 
 export function signInGet(req, res) {
-  res.render("sign-in", { title: "Sign In" });
+  const errorMessages = req.session.messages || [];
+  req.session.messages = [];
+
+  res.render("sign-in", {
+    title: "Sign In",
+    errorMessages,
+  });
 }
+
+export const signInPost = passport.authenticate("local", {
+  successRedirect: "/",
+  failureRedirect: "/sign-in",
+  failureMessage: true,
+});
