@@ -36,3 +36,15 @@ wa-input.invalid {
     color: var(--wa-color-danger-60);
   }
 }
+
+wa-input.valid {
+  &::part(base) {
+    outline-color: var(--wa-color-success);
+    border-color: var(--wa-color-success);
+  }
+
+  &::part(hint),
+  .form-validity-icon {
+    color: var(--wa-color-success-70);
+  }
+}

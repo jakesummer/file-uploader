@@ -2,6 +2,18 @@ const username = document.getElementById("username");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirm-password");
 
+function debounce(func, delay) {
+  let timer;
+
+  const debounced = (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => func(...args), delay);
+  };
+  debounced.cancel = () => clearTimeout(timer);
+
+  return debounced;
+}
+
 function updateInputUi(input, errors, validMsg = null) {
   input.querySelectorAll(".form-validity-icon").forEach((i) => i.remove());
 
@@ -66,7 +78,40 @@ function getSamePasswordsError() {
   return null;
 }
 
-function validateUsername() {
+async function checkUsernameAvailability() {
+  if (username.checkVisibility() && username.value) {
+    try {
+      const res = await fetch(
+        `/username/${encodeURIComponent(username.value)}`,
+      );
+
+      if (!res.ok) {
+        throw new Error(`Server responded with status: ${res.status}`);
+      }
+
+      const data = await res.json();
+
+      if (!data.available) {
+        return "Username is taken!";
+      }
+      return null;
+    } catch {
+      return "Could not verify username. Please try again.";
+    }
+  }
+}
+
+const debouncedFetchAvailability = debounce(async () => {
+  const usernameAvailabilityMsg = await checkUsernameAvailability();
+
+  if (usernameAvailabilityMsg) {
+    updateInputUi(username, [usernameAvailabilityMsg]);
+  } else {
+    updateInputUi(username, null, "Username Available!");
+  }
+}, 500);
+
+async function validateUsername() {
   const pattern = /^[a-zA-Z0-9_.]+$/;
   const errors = [];
 
@@ -76,7 +121,13 @@ function validateUsername() {
   if (lengthErr) errors.push(lengthErr);
   if (patternErr) errors.push(patternErr);
 
-  updateInputUi(username, errors);
+  if (errors.length > 0) {
+    debouncedFetchAvailability.cancel();
+    updateInputUi(username, errors);
+  } else {
+    updateInputUi(username, [], "Username Available!");
+    debouncedFetchAvailability();
+  }
 }
 
 function validatePassword() {
