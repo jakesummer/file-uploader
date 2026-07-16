@@ -54,3 +54,7 @@ export const signUpPost = [
     }
   },
 ];
+
+export function signInGet(req, res) {
+  res.render("sign-in", { title: "Sign In" });
+}
