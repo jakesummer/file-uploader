@@ -3,7 +3,7 @@
 <wa-card class="auth-card" appearance="filled">
   <h1>Create an Account</h1>
   <p>Already have an account? <a href="/sign-in">Sign In</a></p>
-  <form action="sign-up" method="post">
+  <form action="sign-up" method="post" id="sign-up-form">
    <wa-input
       label="Username"
       class="<%= locals.usernameErrorMsg ? "invalid" : "" %>"

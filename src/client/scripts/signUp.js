@@ -1,6 +1,7 @@
 const username = document.getElementById("username-sign-up");
 const password = document.getElementById("password-sign-up");
 const confirmPassword = document.getElementById("confirm-password");
+const form = document.getElementById("sign-up-form");
 
 function debounce(func, delay) {
   let timer;
@@ -161,6 +162,14 @@ function validateConfirmPassword() {
 document.addEventListener("DOMContentLoaded", () => {
   validateUsername();
   validatePassword();
+});
+
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const err = await checkUsernameAvailability();
+  if (!err) {
+    form.submit();
+  }
 });
 
 username.addEventListener("input", validateUsername);
