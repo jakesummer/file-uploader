@@ -2,7 +2,7 @@ import prisma from "../prisma.js";
 
 export async function getUserByUsername(username) {
   return prisma.user.findUnique({
-    where: { username },
+    where: { username: username.toLowerCase() },
   });
 }
 
