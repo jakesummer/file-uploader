@@ -5,6 +5,7 @@ main {
 .auth-card {
   h1 {
     font-size: var(--wa-font-size-2xl);
+    margin-bottom: 4px;
   }
 
   width: 50vw;
