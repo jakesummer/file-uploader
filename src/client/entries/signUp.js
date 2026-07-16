@@ -1,3 +1,6 @@
+import "../styles/global.css";
+import "../styles/auth.css";
+
 const username = document.getElementById("username-sign-up");
 const password = document.getElementById("password-sign-up");
 const confirmPassword = document.getElementById("confirm-password");

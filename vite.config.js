@@ -7,7 +7,8 @@ export default defineConfig({
     rolldownOptions: {
       input: {
         main: "src/client/entries/dashboard.js",
-        auth: "src/client/entries/auth.js",
+        signUp: "src/client/entries/signUp.js",
+        signIn: "src/client/entries/signIn.js",
       },
       output: {
         entryFileNames: "assets/[name].js",
