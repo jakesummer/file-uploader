@@ -8,7 +8,11 @@ main {
     margin-bottom: 4px;
   }
 
-  width: 50vw;
+  a {
+    white-space: nowrap;
+  }
+
+  width: clamp(300px, 90vw, 800px);
   padding: 0.5rem 1rem;
 
   form {
