@@ -112,6 +112,8 @@ const debouncedFetchAvailability = debounce(async () => {
 }, 500);
 
 async function validateUsername() {
+  if (!username.value) return;
+
   const pattern = /^[a-zA-Z0-9_.]+$/;
   const errors = [];
 
@@ -131,6 +133,8 @@ async function validateUsername() {
 }
 
 function validatePassword() {
+  if (!password.value) return;
+
   const pattern = /^[a-zA-Z0-9_.[\]{}()!@#$%^&*+\-=\\/|:;'",<>?`~]+$/;
 
   const errors = [];
@@ -154,6 +158,11 @@ function validateConfirmPassword() {
 
   updateInputUi(confirmPassword, errors);
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  validateUsername();
+  validatePassword();
+});
 
 username.addEventListener("input", validateUsername);
 
