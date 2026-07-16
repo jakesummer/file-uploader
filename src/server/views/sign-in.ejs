@@ -1,41 +1,52 @@
-<%- include("partials/auth-header") %>
+<!DOCTYPE html>
+<html lang="en" class="wa-dark wa-theme-default wa-brand-yellow wa-warning-purple">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %> - File Uploader</title>
+    <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.10.0/styles/webawesome.css" />
+    <script type="module" src="https://ka-f.webawesome.com/webawesome@3.10.0/webawesome.loader.js"></script>
+    <%- include("partials/entry-loader", { entry: "auth" }) %>
+  </head>
+  <body>
+    <main>
+      <wa-card class="auth-card" appearance="filled">
+        <h1>Sign In</h1>
+        <p>Don't have an account yet? <a href="/sign-up">Sign Up</a></p>
+        <form action="sign-in" method="post">
+        <wa-input
+            label="Username"
+            id="username-sign-in"
+            name="username"
+            required
+            minlength="2"
+            maxlength="16"
+          >
+          </wa-input>
+        
+          <wa-input 
+            type="password" 
+            label="Password"
+            id="password-sign-in" 
+            name="password" 
+            required 
+            minlength="8" 
+            maxlength="16"
+          >
+          </wa-input>
 
-<wa-card class="auth-card" appearance="filled">
-  <h1>Sign In</h1>
-  <p>Don't have an account yet? <a href="/sign-up">Sign Up</a></p>
-  <form action="sign-in" method="post">
-   <wa-input
-      label="Username"
-      id="username-sign-in"
-      name="username"
-      required
-      minlength="2"
-      maxlength="16"
-    >
-    </wa-input>
-  
-    <wa-input 
-      type="password" 
-      label="Password"
-      id="password-sign-in" 
-      name="password" 
-      required 
-      minlength="8" 
-      maxlength="16"
-    >
-    </wa-input>
+          <% if (locals.errorMessages?.length > 0) { %>
+            <ul class="error-messages">
+              <% errorMessages.forEach(msg => { %>
+                <li><%= msg %></li>
+              <% }); %>
+            </ul>
+          <% } %>
+          
+          <wa-button type="submit" variant="brand" size="l">Sign In</wa-button>
+        </form>
 
-    <% if (locals.errorMessages?.length > 0) { %>
-      <ul class="error-messages">
-        <% errorMessages.forEach(msg => { %>
-          <li><%= msg %></li>
-        <% }); %>
-      </ul>
-    <% } %>
-    
-    <wa-button type="submit" variant="brand" size="l">Sign In</wa-button>
-  </form>
-
-</wa-card>
-
-<%- include("partials/auth-footer") %>
+      </wa-card>
+    </main>
+  </body>
+</html>

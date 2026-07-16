@@ -1,44 +1,55 @@
-<%- include("partials/auth-header") %>
-
-<wa-card class="auth-card" appearance="filled">
-  <h1>Create an Account</h1>
-  <p>Already have an account? <a href="/sign-in">Sign In</a></p>
-  <form action="sign-up" method="post" id="sign-up-form">
-   <wa-input
-      label="Username"
-      class="<%= locals.usernameErrorMsg ? "invalid" : "" %>"
-      value="<%= locals.username %>"
-      hint="<%= locals.usernameErrorMsg %>"
-      id="username-sign-up"
-      name="username"
-      required
-      minlength="2"
-      maxlength="16"
-    >
-      <% if (locals.usernameErrorMsg) { %>
-      <wa-icon name="circle-exclamation" slot="end" class="form-validity-icon"></wa-icon>
-      <% } %>
-    </wa-input>
-  
-    <wa-input 
-      type="password" 
-      label="Password"
-      class="<%= locals.passwordErrorMsg ? "invalid" : "" %>"
-      hint="<%= locals.passwordErrorMsg %>" 
-      id="password-sign-up" 
-      name="password" 
-      required 
-      minlength="8" 
-      maxlength="16"
-    >
-      <% if (locals.passwordErrorMsg) { %>
-       <wa-icon name="circle-exclamation" slot="end" class="form-validity-icon"></wa-icon>
-      <% } %>
-    </wa-input>
-    
-    <wa-input type="password" label="Confirm Password" id="confirm-password" required minlength="8" maxlength="16"></wa-input>
-    <wa-button type="submit" variant="brand" size="l">Sign Up</wa-button>
-  </form>
-</wa-card>
-
-<%- include("partials/auth-footer") %>
+<!DOCTYPE html>
+<html lang="en" class="wa-dark wa-theme-default wa-brand-yellow wa-warning-purple">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %> - File Uploader</title>
+    <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.10.0/styles/webawesome.css" />
+    <script type="module" src="https://ka-f.webawesome.com/webawesome@3.10.0/webawesome.loader.js"></script>
+    <%- include("partials/entry-loader", { entry: "auth" }) %>
+  </head>
+  <body>
+    <main>
+      <wa-card class="auth-card" appearance="filled">
+        <h1>Create an Account</h1>
+        <p>Already have an account? <a href="/sign-in">Sign In</a></p>
+        <form action="sign-up" method="post" id="sign-up-form">
+        <wa-input
+            label="Username"
+            class="<%= locals.usernameErrorMsg ? "invalid" : "" %>"
+            value="<%= locals.username %>"
+            hint="<%= locals.usernameErrorMsg %>"
+            id="username-sign-up"
+            name="username"
+            required
+            minlength="2"
+            maxlength="16"
+          >
+            <% if (locals.usernameErrorMsg) { %>
+            <wa-icon name="circle-exclamation" slot="end" class="form-validity-icon"></wa-icon>
+            <% } %>
+          </wa-input>
+        
+          <wa-input 
+            type="password" 
+            label="Password"
+            class="<%= locals.passwordErrorMsg ? "invalid" : "" %>"
+            hint="<%= locals.passwordErrorMsg %>" 
+            id="password-sign-up" 
+            name="password" 
+            required 
+            minlength="8" 
+            maxlength="16"
+          >
+            <% if (locals.passwordErrorMsg) { %>
+            <wa-icon name="circle-exclamation" slot="end" class="form-validity-icon"></wa-icon>
+            <% } %>
+          </wa-input>
+          
+          <wa-input type="password" label="Confirm Password" id="confirm-password" required minlength="8" maxlength="16"></wa-input>
+          <wa-button type="submit" variant="brand" size="l">Sign Up</wa-button>
+        </form>
+      </wa-card>
+    </main>
+  </body>
+</html>
