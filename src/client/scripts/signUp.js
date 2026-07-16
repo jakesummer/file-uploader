@@ -32,20 +32,19 @@ function updateInputUi(input, errors, validMsg = null) {
     input.classList.remove("valid");
     input.classList.add("invalid");
   } else {
+    if (!input.value) return;
     input.setCustomValidity("");
     input.classList.remove("invalid");
     input.hint = "";
 
-    if (validMsg) {
-      const icon = Object.assign(document.createElement("wa-icon"), {
-        name: "circle-check",
-        slot: "end",
-        className: "form-validity-icon",
-      });
-      input.appendChild(icon);
-      input.hint = validMsg;
-      input.classList.add("valid");
-    }
+    const icon = Object.assign(document.createElement("wa-icon"), {
+      name: "circle-check",
+      slot: "end",
+      className: "form-validity-icon",
+    });
+    input.appendChild(icon);
+    input.hint = validMsg;
+    input.classList.add("valid");
   }
 }
 
