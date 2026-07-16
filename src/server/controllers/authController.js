@@ -3,7 +3,7 @@ import { createNewUser, getUserByUsername } from "../db/queries/userQueries.js";
 import { hashPassword } from "../lib/passwordUtils.js";
 
 export function signUpGet(req, res) {
-  res.render("sign-up");
+  res.render("sign-up", { title: "Sign Up" });
 }
 
 const lengthErr = (min, max) => `must be between ${min} and ${max} characters!`;
@@ -40,6 +40,7 @@ export const signUpPost = [
         username: req.body.username,
         usernameErrorMsg: errorsArr.find((e) => e.path === "username")?.msg,
         passwordErrorMsg: errorsArr.find((e) => e.path === "password")?.msg,
+        title: "Sign Up",
       });
     }
 
