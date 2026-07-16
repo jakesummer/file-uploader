@@ -16,8 +16,8 @@ const validateUser = [
     .withMessage(
       "Username can only contain letters, numbers, underscores, and periods!",
     )
-    .custom((username) => {
-      const user = getUserByUsername(username);
+    .custom(async (username) => {
+      const user = await getUserByUsername(username);
       if (user) throw new Error("Username is taken!");
     }),
   body("password")
