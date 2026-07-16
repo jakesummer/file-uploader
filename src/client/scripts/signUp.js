@@ -1,5 +1,5 @@
-const username = document.getElementById("username");
-const password = document.getElementById("password");
+const username = document.getElementById("username-sign-up");
+const password = document.getElementById("password-sign-up");
 const confirmPassword = document.getElementById("confirm-password");
 
 function debounce(func, delay) {
