@@ -1,5 +1,5 @@
 import { body, matchedData, validationResult } from "express-validator";
-import { createNewUser } from "../db/queries/userQueries.js";
+import { createNewUser, getUserByUsername } from "../db/queries/userQueries.js";
 import { hashPassword } from "../lib/passwordUtils.js";
 
 export function signUpGet(req, res) {
@@ -15,7 +15,11 @@ const validateUser = [
     .matches(/^[a-zA-Z0-9_.]+$/)
     .withMessage(
       "Username can only contain letters, numbers, underscores, and periods!",
-    ),
+    )
+    .custom((username) => {
+      const user = getUserByUsername(username);
+      if (user) throw new Error("Username is taken!");
+    }),
   body("password")
     .trim()
     .isLength({ min: 8, max: 16 })
