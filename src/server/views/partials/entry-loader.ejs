@@ -1,0 +1,6 @@
+<% if (isProd) { %>
+  <link rel="stylesheet" href="/assets/<%= entry %>.css" />
+  <script type="module" src="/assets/<%= entry %>.js"></script>
+<% } else { %>
+  <script type="module" src="/src/client/entries/<%= entry %>.js"></script>
+<% } %>
