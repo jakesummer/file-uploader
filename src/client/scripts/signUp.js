@@ -2,10 +2,10 @@ const username = document.getElementById("username");
 const password = document.getElementById("password");
 const confirmPassword = document.getElementById("confirm-password");
 
-function updateInputUi(input, errors) {
-  input.querySelectorAll(".form-invalid-icon").forEach((i) => i.remove());
+function updateInputUi(input, errors, validMsg = null) {
+  input.querySelectorAll(".form-validity-icon").forEach((i) => i.remove());
 
-  if (errors.length > 0) {
+  if (errors && errors.length > 0) {
     const message = errors[0];
 
     input.setCustomValidity(message);
@@ -14,14 +14,26 @@ function updateInputUi(input, errors) {
     const icon = Object.assign(document.createElement("wa-icon"), {
       name: "circle-exclamation",
       slot: "end",
-      className: "form-invalid-icon",
+      className: "form-validity-icon",
     });
     input.appendChild(icon);
+    input.classList.remove("valid");
     input.classList.add("invalid");
   } else {
     input.setCustomValidity("");
     input.classList.remove("invalid");
     input.hint = "";
+
+    if (validMsg) {
+      const icon = Object.assign(document.createElement("wa-icon"), {
+        name: "circle-check",
+        slot: "end",
+        className: "form-validity-icon",
+      });
+      input.appendChild(icon);
+      input.hint = validMsg;
+      input.classList.add("valid");
+    }
   }
 }
 

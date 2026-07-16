@@ -32,7 +32,7 @@ wa-input.invalid {
   }
 
   &::part(hint),
-  .form-invalid-icon {
+  .form-validity-icon {
     color: var(--wa-color-danger-60);
   }
 }
