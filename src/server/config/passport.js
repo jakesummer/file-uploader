@@ -35,7 +35,7 @@ passport.deserializeUser(async (id, done) => {
     if (!user) {
       return done(null, false);
     }
-    done(null, user);
+    done(null, { id: user.id, username: user.username });
   } catch (err) {
     done(err);
   }
