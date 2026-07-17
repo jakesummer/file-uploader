@@ -42,6 +42,8 @@ import "./config/passport.js";
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 
+app.get("/", (req, res) => res.redirect("/dashboard"));
+
 app.use(authRouter);
 app.use("/dashboard", isAuthenticated, dashboardRouter);
 app.use("/username", userRouter);
