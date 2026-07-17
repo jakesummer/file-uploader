@@ -73,3 +73,16 @@ export const signInPost = passport.authenticate("local", {
   failureRedirect: "/sign-in",
   failureMessage: true,
 });
+
+export function signOutPost(req, res, next) {
+  req.logout((err) => {
+    if (err) return next(err);
+
+    req.session.destroy((desErr) => {
+      if (desErr) return next(desErr);
+
+      res.clearCookie("connect.sid");
+      res.redirect("/sign-in");
+    });
+  });
+}
