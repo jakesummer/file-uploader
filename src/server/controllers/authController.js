@@ -69,7 +69,7 @@ export function signInGet(req, res) {
 }
 
 export const signInPost = passport.authenticate("local", {
-  successRedirect: "/",
+  successRedirect: "/dashboard",
   failureRedirect: "/sign-in",
   failureMessage: true,
 });
