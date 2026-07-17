@@ -60,7 +60,7 @@ export const signUpPost = [
 
 export function signInGet(req, res) {
   const errorMessages = req.session.messages || [];
-  req.session.messages = [];
+  delete req.session.messages;
 
   res.render("sign-in", {
     title: "Sign In",
