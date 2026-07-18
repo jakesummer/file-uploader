@@ -4,17 +4,18 @@ nav {
 }
 
 header {
+  font-size: clamp(1rem, 5vw, 1.5rem);
   border-bottom: var(--border);
   padding: var(--wa-space-m) var(--wa-space-2xl);
 
   p {
-    font-size: 1.5rem;
+    font-size: 1em;
     font-weight: 800;
     margin: 0;
   }
 
   wa-button {
-    font-size: 1.5rem;
+    font-size: 1em;
 
     &#sign-out-btn::part(base):hover {
       color: var(--wa-color-danger-on-quiet);
