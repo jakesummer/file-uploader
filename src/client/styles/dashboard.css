@@ -1,6 +1,11 @@
-header {
+header,
+nav {
+  --border: 3px solid var(--wa-color-surface-border);
   background-color: var(--wa-color-surface-raised);
-  border-bottom: 3px solid var(--wa-color-surface-border);
+}
+
+header {
+  border-bottom: var(--border);
   padding: var(--wa-space-m) var(--wa-space-2xl);
 
   p {
@@ -16,4 +21,8 @@ header {
       color: var(--wa-color-danger-on-quiet);
     }
   }
+}
+
+nav {
+  border-right: var(--border);
 }
