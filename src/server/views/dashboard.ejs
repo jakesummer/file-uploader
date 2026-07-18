@@ -1,17 +1,33 @@
 <%- include("partials/header") %>
 
 <nav slot="navigation-header">
-  <wa-button appearance="outlined" variant="brand" id="new-folder-btn">
+  <wa-button appearance="outlined" variant="brand" id="new-folder-btn" data-dialog="open new-folder-dialog">
     <wa-icon name="folder-plus"></wa-icon>
     New Folder
   </wa-button>
-  <wa-button appearance="outlined" variant="brand" id="new-file-btn">
+  <wa-button appearance="outlined" variant="brand" id="new-file-btn" data-dialog="open new-file-dialog">
     <wa-icon name="file-circle-plus"></wa-icon>
     New File
   </wa-button>
 </nav>
 
 <nav slot="navigation"></nav>
+
+<wa-dialog label="Create New Folder" id="new-folder-dialog">
+  <form action="/folder/create" method="post" id="new-folder-form">
+    <wa-input label="Name" name="name" required></wa-input>
+  </form>
+  <wa-button appearance="outlined" variant="danger" data-dialog="close" slot="footer">Close</wa-button>
+  <wa-button type="submit" form="new-folder-form" variant="brand" slot="footer">Create</wa-button>
+</wa-dialog>
+
+<wa-dialog label="Upload New File" id="new-file-dialog">
+  <form action="/file/upload" method="post" id="new-file-form">
+    <input type="file" name="file" required>
+  </form>
+  <wa-button appearance="outlined" variant="danger" data-dialog="close" slot="footer">Close</wa-button>
+  <wa-button type="submit" form="new-file-form" variant="brand" slot="footer">Upload</wa-button>
+</wa-dialog>
 
 <main></main>
 
