@@ -14,7 +14,7 @@
 <nav slot="navigation"></nav>
 
 <wa-dialog label="Create New Folder" id="new-folder-dialog">
-  <form action="/folder/create" method="post" id="new-folder-form">
+  <form action="/item/create/folder" method="post" id="new-folder-form">
     <wa-input label="Name" name="name" required></wa-input>
   </form>
   <wa-button appearance="outlined" variant="danger" data-dialog="close" slot="footer">Close</wa-button>
@@ -22,7 +22,7 @@
 </wa-dialog>
 
 <wa-dialog label="Upload New File" id="new-file-dialog">
-  <form action="/file/upload" method="post" id="new-file-form">
+  <form action="/item/create/file" method="post" id="new-file-form">
     <input type="file" name="file" required>
   </form>
   <wa-button appearance="outlined" variant="danger" data-dialog="close" slot="footer">Close</wa-button>
