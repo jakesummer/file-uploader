@@ -8,6 +8,7 @@ import passport from "passport";
 import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/userRouter.js";
 import dashboardRouter from "./routes/dashboardRouter.js";
+import itemRouter from "./routes/itemRouter.js";
 import isAuthenticated from "./middlewear/isAuthenticated.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 
@@ -46,6 +47,7 @@ app.get("/", (req, res) => res.redirect("/dashboard"));
 
 app.use(authRouter);
 app.use("/dashboard", isAuthenticated, dashboardRouter);
+app.use("/item", isAuthenticated, itemRouter);
 app.use("/username", userRouter);
 
 const PORT = process.env.PORT || 3000;
