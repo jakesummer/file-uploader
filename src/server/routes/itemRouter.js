@@ -11,4 +11,6 @@ itemRouter.post("/create/:itemType{/:parentId}", (req, res) => {
   }
 });
 
+itemRouter.post("/delete/:id", itemController.deletePost);
+
 export default itemRouter;

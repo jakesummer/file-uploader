@@ -1,4 +1,4 @@
-import { createNewFolder } from "../db/queries/itemQueries.js";
+import { createNewFolder, deleteItem } from "../db/queries/itemQueries.js";
 
 export async function createFolderPost(req, res) {
   const folderName = req.body.name;
@@ -7,4 +7,12 @@ export async function createFolderPost(req, res) {
 
   await createNewFolder(folderName, userId, parentId);
   res.redirect(parentId ? `/dashboard/${parentId}` : "/dashboard");
+}
+
+export async function deletePost(req, res) {
+  const id = req.params.id;
+  const deletedItem = await deleteItem(id);
+  const parentId = deletedItem.parentId ? deletedItem.parentId : "";
+
+  res.redirect(`/dashboard/${parentId}`);
 }

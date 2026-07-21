@@ -27,3 +27,7 @@ export async function createNewFolder(folderName, userId, parentId) {
     },
   });
 }
+
+export async function deleteItem(id) {
+  return await prisma.item.delete({ where: { id: Number(id) } });
+}
