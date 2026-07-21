@@ -1,0 +1,33 @@
+.item {
+  width: 100%;
+  background-color: var(--wa-color-surface-raised);
+
+  &::part(base):hover {
+    color: var(--wa-color-brand-on-quiet);
+    border-color: var(--wa-color-brand-border-loud);
+    background-color: var(--wa-color-brand-fill-quiet);
+  }
+
+  &::part(label) {
+    width: 100%;
+  }
+}
+
+.item-content {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2.5fr 1fr 1fr;
+  gap: 1rem;
+}
+
+.item-col-name {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

@@ -23,6 +23,13 @@ header {
   }
 }
 
+main {
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-inline: 1rem;
+  gap: 0.5rem;
+}
+
 @media (min-width: 768px) {
   nav {
     border-right: var(--border);

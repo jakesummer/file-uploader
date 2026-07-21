@@ -29,6 +29,21 @@
   <wa-button type="submit" form="new-file-form" variant="brand" slot="footer">Upload</wa-button>
 </wa-dialog>
 
-<main></main>
+<main>
+  <% if (locals.items?.length > 0) { %>
+    <% locals.items.forEach((item) => { %>
+      <wa-button appearance="outlined" href="/dashboard/<%= item.id %>" class="item">
+        <span class="item-content">
+          <span class="item-col-name">
+            <wa-icon name="folder"></wa-icon>
+            <p><%= item.name %></p>
+          </span>
+          <span class="item-col"><%= item.size || "--" %></span>
+          <span class="item-col"><%= item.createdAt %></span>
+        </span>
+      </wa-button>
+    <% }); %>
+  <% } %>
+</main>
 
 <%- include("partials/footer") %>
