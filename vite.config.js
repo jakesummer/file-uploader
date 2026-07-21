@@ -9,6 +9,7 @@ export default defineConfig({
         main: "src/client/entries/dashboard.js",
         signUp: "src/client/entries/signUp.js",
         signIn: "src/client/entries/signIn.js",
+        error: "src/client/entries/error.js",
       },
       output: {
         entryFileNames: "assets/[name].js",
