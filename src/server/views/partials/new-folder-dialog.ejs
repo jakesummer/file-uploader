@@ -1,5 +1,5 @@
 <wa-dialog label="Create New Folder" id="new-folder-dialog">
-  <form action="/item/create/folder" method="post" id="new-folder-form">
+  <form action="/item/create/folder/<%= folderId %>" method="post" id="new-folder-form">
     <wa-input label="Name" name="name" required></wa-input>
   </form>
   <wa-button

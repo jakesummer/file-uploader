@@ -17,12 +17,13 @@ export async function getFolderById(userId, folderId) {
   });
 }
 
-export async function createNewFolder(folderName, userId) {
+export async function createNewFolder(folderName, userId, parentId) {
   await prisma.item.create({
     data: {
       name: folderName,
       type: "FOLDER",
       userId: userId,
+      parentId,
     },
   });
 }

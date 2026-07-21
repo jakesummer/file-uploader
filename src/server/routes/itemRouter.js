@@ -3,7 +3,7 @@ import { Router } from "express";
 
 const itemRouter = Router();
 
-itemRouter.post("/create/:itemType", (req, res) => {
+itemRouter.post("/create/:itemType{/:parentId}", (req, res) => {
   const { itemType } = req.params;
 
   if (itemType === "folder") {
