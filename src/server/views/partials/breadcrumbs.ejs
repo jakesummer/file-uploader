@@ -1,0 +1,5 @@
+<wa-breadcrumb>
+  <% breadcrumbs.forEach(breadcrumb => { %>
+    <wa-breadcrumb-item href="/dashboard/<%= breadcrumb.id %>"><%= breadcrumb.name %></wa-breadcrumb-item>
+  <% }); %>
+</wa-breadcrumb>

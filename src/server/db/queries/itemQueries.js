@@ -8,6 +8,15 @@ export async function getUserItems(userId, parentId) {
   });
 }
 
+export async function getFolderById(userId, folderId) {
+  return prisma.item.findFirst({
+    where: {
+      id: folderId,
+      userId: userId,
+    },
+  });
+}
+
 export async function createNewFolder(folderName, userId) {
   await prisma.item.create({
     data: {
