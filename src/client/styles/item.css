@@ -38,3 +38,7 @@
     text-overflow: ellipsis;
   }
 }
+
+.no-items-text {
+  margin-top: 3rem;
+}

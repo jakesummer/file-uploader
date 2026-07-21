@@ -40,6 +40,8 @@
     <% locals.items.forEach((item) => { %>
       <%- include("partials/item", { item }) %>
     <% }); %>
+  <% } else { %>
+    <p class="no-items-text wa-color-text-quiet">No items yet. Upload a file or create a folder to get started.</p>
   <% } %>
 </main>
 
