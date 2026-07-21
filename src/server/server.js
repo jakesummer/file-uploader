@@ -9,7 +9,7 @@ import authRouter from "./routes/authRouter.js";
 import userRouter from "./routes/userRouter.js";
 import dashboardRouter from "./routes/dashboardRouter.js";
 import itemRouter from "./routes/itemRouter.js";
-import isAuthenticated from "./middlewear/isAuthenticated.js";
+import isAuthenticated from "./middleware/isAuthenticated.js";
 import * as ejsHelpers from "./utils/ejsHelpers.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 
