@@ -6,5 +6,6 @@ export async function dashboardGet(req, res) {
 
   res.render("dashboard", {
     items: await getUserItems(userId, folderId),
+    folderId,
   });
 }
