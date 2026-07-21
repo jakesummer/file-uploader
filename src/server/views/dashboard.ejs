@@ -13,22 +13,6 @@
 
 <nav slot="navigation"></nav>
 
-<wa-dialog label="Create New Folder" id="new-folder-dialog">
-  <form action="/item/create/folder" method="post" id="new-folder-form">
-    <wa-input label="Name" name="name" required></wa-input>
-  </form>
-  <wa-button appearance="outlined" variant="danger" data-dialog="close" slot="footer">Close</wa-button>
-  <wa-button type="submit" form="new-folder-form" variant="brand" slot="footer">Create</wa-button>
-</wa-dialog>
-
-<wa-dialog label="Upload New File" id="new-file-dialog">
-  <form action="/item/create/file" method="post" id="new-file-form">
-    <input type="file" name="file" required>
-  </form>
-  <wa-button appearance="outlined" variant="danger" data-dialog="close" slot="footer">Close</wa-button>
-  <wa-button type="submit" form="new-file-form" variant="brand" slot="footer">Upload</wa-button>
-</wa-dialog>
-
 <main>
   <div class="item-header item-grid">
     <span class="item-col-name">Name</span>
@@ -44,5 +28,8 @@
     <p class="no-items-text wa-color-text-quiet">No items yet. Upload a file or create a folder to get started.</p>
   <% } %>
 </main>
+
+<%- include("partials/new-folder-dialog") %>
+<%- include("partials/new-file-dialog") %>
 
 <%- include("partials/footer") %>
