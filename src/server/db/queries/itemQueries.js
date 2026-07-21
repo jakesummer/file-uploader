@@ -20,6 +20,10 @@ export async function getUserItems(userId, parentId = null) {
   });
 }
 
+export async function getUserFolders(userId) {
+  return prisma.item.findMany({ where: { userId } });
+}
+
 export async function getItemById(id) {
   return prisma.item.findUnique({ where: { id: toNum(id) } });
 }
