@@ -13,25 +13,7 @@
 
 <nav slot="navigation"></nav>
 
-<main>
-  <div class="item-header item-grid">
-    <span class="item-col-name">Name</span>
-    <span class="item-col">Size</span>
-    <span class="item-col">Updated</span>
-  </div>
-
-  <% if (locals.items?.length > 0) { %>
-    <% locals.items.forEach((item) => { %>
-      <%- include("partials/item", { item }) %>
-    <% }); %>
-  <% } else { %>
-    <% if (folderId === undefined) { %>
-      <p class="no-items-text wa-color-text-quiet">No items yet. Upload a file or create a folder to get started.</p>
-      <% } else {%>
-      <p class="no-items-text wa-color-text-quiet">Folder is empty.</p>
-    <% } %>
-  <% } %>
-</main>
+<main><%- include("partials/item-display") %></main>
 
 <%- include("partials/new-folder-dialog") %>
 <%- include("partials/new-file-dialog") %>
