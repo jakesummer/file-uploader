@@ -1,43 +1,6 @@
 <%- include("partials/header") %>
 
-<nav slot="navigation-header">
-  <wa-button
-    appearance="outlined"
-    variant="brand"
-    id="new-folder-btn"
-    data-dialog="open new-folder-dialog"
-    size="s"
-  >
-    <wa-icon name="folder-plus"></wa-icon>
-    New Folder
-  </wa-button>
-
-  <wa-button
-    appearance="outlined"
-    variant="brand"
-    id="new-file-btn"
-    data-dialog="open new-file-dialog"
-    size="s"
-  >
-    <wa-icon name="file-circle-plus"></wa-icon>
-    New File
-  </wa-button>
-
-  <% if (folderId) { %>
-    <wa-button
-      appearance="outlined"
-      variant="brand"
-      id="delete-folder-btn"
-      data-dialog="open delete-folder-dialog"
-      size="s"
-    >
-      <wa-icon name="trash-can"></wa-icon>
-      Delete Folder
-    </wa-button>
-  <% } %>
-</nav>
-
-<nav slot="navigation"></nav>
+<%- include("partials/sidebar") %>
 
 <div class="main-header" slot="main-header">
   <%- include("partials/breadcrumbs") %>
