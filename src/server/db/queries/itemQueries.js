@@ -1,22 +1,34 @@
 import prisma from "../prisma.js";
 
-export async function getUserItems(userId, parentId) {
-  parentId = parentId ? Number(parentId) : null;
+const toNum = (val) => {
+  if (
+    val === null ||
+    val === undefined ||
+    (typeof val === "string" && val.trim() === "")
+  ) {
+    return null;
+  }
+  return Number(val);
+};
 
+export async function getUserItems(userId, parentId = null) {
   return prisma.item.findMany({
-    where: { userId, parentId },
+    where: {
+      userId: toNum(userId),
+      parentId: toNum(parentId),
+    },
   });
 }
 
 export async function getItemById(id) {
-  return prisma.item.findUnique({ where: { id: Number(id) } });
+  return prisma.item.findUnique({ where: { id: toNum(id) } });
 }
 
 export async function getFolderById(userId, folderId) {
   return prisma.item.findFirst({
     where: {
-      id: folderId,
-      userId: userId,
+      id: toNum(folderId),
+      userId: toNum(userId),
     },
   });
 }
@@ -26,12 +38,12 @@ export async function createNewFolder(folderName, userId, parentId) {
     data: {
       name: folderName,
       type: "FOLDER",
-      userId: userId,
-      parentId,
+      userId: toNum(userId),
+      parentId: toNum(parentId),
     },
   });
 }
 
 export async function deleteItem(id) {
-  return await prisma.item.delete({ where: { id: Number(id) } });
+  return await prisma.item.delete({ where: { id: toNum(id) } });
 }
