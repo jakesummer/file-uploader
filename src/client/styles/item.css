@@ -1,3 +1,17 @@
+.item-header {
+  padding-inline: var(--wa-form-control-padding-inline);
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.item-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 4fr repeat(2, minmax(max-content, 2fr));
+  align-items: center;
+  gap: 1rem;
+}
+
 .item {
   width: 100%;
   background-color: var(--wa-color-surface-raised);
@@ -11,13 +25,6 @@
   &::part(label) {
     width: 100%;
   }
-}
-
-.item-content {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 4fr 1fr 1fr;
-  gap: 1rem;
 }
 
 .item-col-name {

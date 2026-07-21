@@ -30,6 +30,12 @@
 </wa-dialog>
 
 <main>
+  <div class="item-header item-grid">
+    <span class="item-col-name">Name</span>
+    <span class="item-col">Size</span>
+    <span class="item-col">Updated</span>
+  </div>
+
   <% if (locals.items?.length > 0) { %>
     <% locals.items.forEach((item) => { %>
       <%- include("partials/item", { item }) %>
