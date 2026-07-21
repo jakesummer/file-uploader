@@ -8,6 +8,10 @@ export async function getUserItems(userId, parentId) {
   });
 }
 
+export async function getItemById(id) {
+  return prisma.item.findUnique({ where: { id: Number(id) } });
+}
+
 export async function getFolderById(userId, folderId) {
   return prisma.item.findFirst({
     where: {
