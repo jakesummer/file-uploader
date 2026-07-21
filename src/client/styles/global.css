@@ -12,10 +12,15 @@
   --wa-color-yellow-05: #220d02;
 }
 
+html,
+body,
+main {
+  height: 100%;
+}
+
 main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
