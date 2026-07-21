@@ -1,7 +1,11 @@
 import prisma from "../prisma.js";
 
-export async function getAllUserItems(userId) {
-  return prisma.item.findMany({ where: { userId } });
+export async function getUserItems(userId, parentId) {
+  parentId = parentId ? Number(parentId) : null;
+
+  return prisma.item.findMany({
+    where: { userId, parentId },
+  });
 }
 
 export async function createNewFolder(folderName, userId) {

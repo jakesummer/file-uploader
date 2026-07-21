@@ -3,6 +3,6 @@ import { Router } from "express";
 
 const dashboardRouter = Router();
 
-dashboardRouter.get("/", dashboardController.dashboardGet);
+dashboardRouter.get("/{:folderId}", dashboardController.dashboardGet);
 
 export default dashboardRouter;
