@@ -10,6 +10,7 @@ import userRouter from "./routes/userRouter.js";
 import dashboardRouter from "./routes/dashboardRouter.js";
 import itemRouter from "./routes/itemRouter.js";
 import isAuthenticated from "./middlewear/isAuthenticated.js";
+import * as ejsHelpers from "./utils/ejsHelpers.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 
 const __dirname = import.meta.dirname;
@@ -19,6 +20,7 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+app.locals.helpers = ejsHelpers;
 app.locals.isProd = process.env.NODE_ENV === "production";
 
 app.use(

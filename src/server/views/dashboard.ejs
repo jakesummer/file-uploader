@@ -39,7 +39,7 @@
             <p><%= item.name %></p>
           </span>
           <span class="item-col"><%= item.size || "--" %></span>
-          <span class="item-col"><%= item.createdAt %></span>
+          <span class="item-col"><%= helpers.formatDate(item.createdAt) %></span>
         </span>
       </wa-button>
     <% }); %>
