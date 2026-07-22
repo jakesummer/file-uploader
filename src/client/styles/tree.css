@@ -1,0 +1,15 @@
+wa-tree-item {
+  &::part(label),
+  a {
+    width: 100%;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--wa-color-text-normal);
+
+    &:hover {
+      color: var(--wa-color-text-link);
+    }
+  }
+}

@@ -1,0 +1,14 @@
+<wa-tree>
+  <% function buildTree(folder) {%>
+    <wa-tree-item>
+      <a href="/dashboard/<%= folder.id %>"><%= folder.name %></a>
+      <% if (folder.children.length > 0) { %>
+        <% folder.children.forEach(child => { %>
+        <% buildTree(child) %>
+        <% }) %>
+      <% } %>
+    </wa-tree-item>
+  <% } %>
+  
+  <% buildTree(tree) %>
+</wa-tree>
