@@ -1,14 +1,17 @@
-<wa-tree>
-  <% function buildTree(folder) {%>
+<% function buildTree(folders) {%>
+  <% folders.forEach(folder => { %>
     <wa-tree-item>
       <a href="/dashboard/<%= folder.id %>"><%= folder.name %></a>
       <% if (folder.children.length > 0) { %>
-        <% folder.children.forEach(child => { %>
-        <% buildTree(child) %>
-        <% }) %>
+        <% buildTree(folder.children) %>
       <% } %>
     </wa-tree-item>
-  <% } %>
-  
-  <% buildTree(tree) %>
+  <% }) %>
+<% } %>
+
+<wa-tree>
+  <wa-tree-item expanded="">
+    <a href="/dashboard"><%= tree.name %></a>
+    <% buildTree(tree.children) %>
+  </wa-tree-item>
 </wa-tree>
