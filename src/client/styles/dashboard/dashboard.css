@@ -46,3 +46,7 @@ main {
     padding: var(--wa-space-m) var(--wa-space-l);
   }
 }
+
+wa-page::part(drawer__body) {
+  padding-inline: 0;
+}
