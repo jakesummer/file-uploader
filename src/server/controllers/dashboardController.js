@@ -1,5 +1,5 @@
 import { getUserItems } from "../db/queries/itemQueries.js";
-import getBreadcrumbs from "../utils/getBreadcrumbs.js";
+import getBreadcrumbs from "../lib/getBreadcrumbs.js";
 
 export async function dashboardGet(req, res) {
   const userId = req.user.id;
