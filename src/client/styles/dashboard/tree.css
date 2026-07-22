@@ -1,7 +1,14 @@
+wa-tree {
+  --indent-guide-width: 1px;
+  --indent-size: var(--wa-space-m);
+}
+
 wa-tree-item {
   &::part(label),
   a {
     width: 100%;
+    word-break: break-all;
+    padding-right: 0.3rem;
   }
 
   a {

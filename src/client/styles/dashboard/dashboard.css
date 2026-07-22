@@ -33,9 +33,16 @@ main {
   gap: 0.5rem;
 }
 
+.nav-main {
+  padding: 0;
+}
+
 @media (min-width: 768px) {
   nav {
+    width: 280px;
     border-right: var(--border);
+  }
+  .nav-header {
     padding: var(--wa-space-m) var(--wa-space-l);
   }
 }
