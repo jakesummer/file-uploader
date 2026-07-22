@@ -8,12 +8,17 @@ export async function dashboardGet(req, res) {
   const folderId = req.params.folderId;
 
   const breadcrumbs = await getBreadcrumbs(userId, folderId, username);
-  const tree = await getTree(userId, username);
+  const { tree, expandedFolderIds } = await getTree(
+    userId,
+    username,
+    breadcrumbs,
+  );
 
   res.render("dashboard", {
     items: await getUserItems(userId, folderId),
     folderId,
     breadcrumbs,
     tree,
+    expandedFolderIds,
   });
 }

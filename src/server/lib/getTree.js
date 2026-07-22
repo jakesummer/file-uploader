@@ -1,6 +1,6 @@
 import { getUserFolders } from "../db/queries/itemQueries.js";
 
-export default async function getTree(userId, username) {
+export default async function getTree(userId, username, breadcrumbs) {
   const allFolders = await getUserFolders(userId);
 
   const childrenByParent = {};
@@ -9,6 +9,11 @@ export default async function getTree(userId, username) {
     if (!childrenByParent[pId]) childrenByParent[pId] = [];
     childrenByParent[pId].push(folder);
   }
+
+  const expandedFolderIds = new Set();
+  breadcrumbs
+    .slice(1)
+    .forEach((folder) => expandedFolderIds.add(String(folder.id)));
 
   function getSubtree(parentId) {
     const children = childrenByParent[parentId ?? "root"] || [];
@@ -21,8 +26,11 @@ export default async function getTree(userId, username) {
   }
 
   return {
-    name: username,
-    id: "",
-    children: getSubtree(null), // all folders in root have parentId of null
+    tree: {
+      name: username,
+      id: "",
+      children: getSubtree(null), // all folders in root have parentId of null
+    },
+    expandedFolderIds,
   };
 }

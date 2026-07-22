@@ -1,9 +1,14 @@
-<% function buildTree(folders) {%>
+<% function buildTree(folders) { %>
   <% folders.forEach(folder => { %>
     <% const selected = String(folderId) === String(folder.id); %>
-    <wa-tree-item <%= selected ? "selected" : "" %>>
+    <% const expanded = expandedFolderIds.has(String(folder.id))%>
+
+    <wa-tree-item 
+      <%= selected ? "selected" : "" %>
+      class="<%= expanded ? "expanded" : "" %>"
+    >
       <a href="/dashboard/<%= folder.id %>"><%= folder.name %></a>
-      <% if (folder.children.length > 0) { %>
+      <% if (folder.children && folder.children.length > 0) { %>
         <% buildTree(folder.children) %>
       <% } %>
     </wa-tree-item>
