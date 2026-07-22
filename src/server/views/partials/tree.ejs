@@ -1,6 +1,7 @@
 <% function buildTree(folders) {%>
   <% folders.forEach(folder => { %>
-    <wa-tree-item>
+    <% const selected = String(folderId) === String(folder.id); %>
+    <wa-tree-item <%= selected ? "selected" : "" %>>
       <a href="/dashboard/<%= folder.id %>"><%= folder.name %></a>
       <% if (folder.children.length > 0) { %>
         <% buildTree(folder.children) %>
@@ -10,7 +11,9 @@
 <% } %>
 
 <wa-tree>
-  <wa-tree-item expanded="">
+  <% const rootSelected = folderId === undefined; %>
+
+  <wa-tree-item expanded <%= rootSelected ? "selected" : "" %>>
     <a href="/dashboard"><%= tree.name %></a>
     <% buildTree(tree.children) %>
   </wa-tree-item>
