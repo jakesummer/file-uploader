@@ -19,4 +19,14 @@ wa-tree-item {
       color: var(--wa-color-text-link);
     }
   }
+
+  &[selected]::part(item) {
+    background-color: transparent;
+    border-inline-start-color: transparent;
+  }
+
+  .selected::part(item) {
+    background-color: var(--wa-color-neutral-fill-quiet);
+    border-inline-start-color: var(--wa-color-brand-fill-loud);
+  }
 }
