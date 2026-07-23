@@ -1,6 +1,11 @@
 <%# New File %>
 <wa-dialog label="Upload New File" id="new-file-dialog">
-  <form action="/item/create/file" method="post" id="new-file-form">
+  <form
+    action="/item/create/file"
+    method="post"
+    id="new-file-form"
+    enctype="multipart/form-data"
+  >
     <input type="file" name="file" required />
   </form>
   <wa-button

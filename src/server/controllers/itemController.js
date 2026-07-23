@@ -1,4 +1,17 @@
+import multer from "multer";
+import path from "node:path";
 import { createNewFolder, deleteItem } from "../db/queries/itemQueries.js";
+
+const __dirname = import.meta.dirname;
+const uploadPath = path.join(__dirname, "../../../uploads");
+const upload = multer({ dest: uploadPath });
+
+export const createFilePost = [
+  upload.single("file"),
+  async (req, res) => {
+    console.log(req.file);
+  },
+];
 
 export async function createFolderPost(req, res) {
   const folderName = req.body.name;

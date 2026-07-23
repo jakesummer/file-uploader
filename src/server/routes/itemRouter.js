@@ -3,13 +3,9 @@ import { Router } from "express";
 
 const itemRouter = Router();
 
-itemRouter.post("/create/:itemType{/:parentId}", (req, res) => {
-  const { itemType } = req.params;
+itemRouter.post("/create/folder{/:parentId}", itemController.createFolderPost);
 
-  if (itemType === "folder") {
-    itemController.createFolderPost(req, res);
-  }
-});
+itemRouter.post("/create/file{/parentId}", itemController.createFilePost);
 
 itemRouter.post("/delete/:id", itemController.deletePost);
 
