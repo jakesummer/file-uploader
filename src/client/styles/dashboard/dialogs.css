@@ -10,3 +10,13 @@
 .close-btn:hover::part(base) {
   background-color: var(--wa-color-neutral-20);
 }
+
+#new-file-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  #new-file-hint {
+    color: var(--wa-color-danger-60);
+  }
+}

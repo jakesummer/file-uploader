@@ -6,7 +6,9 @@
     id="new-file-form"
     enctype="multipart/form-data"
   >
-    <input type="file" name="file" required />
+    <label for="new-file-input">Select File (Max 50MB):</label>
+    <input type="file" name="file" id="new-file-input" required />
+    <p id="new-file-hint"></p>
   </form>
   <wa-button
     class="close-btn"
