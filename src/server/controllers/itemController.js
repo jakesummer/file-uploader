@@ -7,12 +7,29 @@ import {
   getFilePath,
 } from "../db/queries/itemQueries.js";
 
+const MAX_FILE_SIZE_MB = 50;
+
 const __dirname = import.meta.dirname;
 const uploadPath = path.join(__dirname, "../../../uploads");
-const upload = multer({ dest: uploadPath });
+const upload = multer({
+  dest: uploadPath,
+  limits: {
+    fileSize: MAX_FILE_SIZE_MB * 1024 * 1024,
+  },
+});
 
 export const createFilePost = [
-  upload.single("file"),
+  (req, res, next) => {
+    upload.single("file")(req, res, (err) => {
+      if (err instanceof multer.MulterError) {
+        req.session.fileSizeError = `File exceeds the ${MAX_FILE_SIZE_MB}MB limit!`;
+        return res.status(400).redirect("/dashboard");
+      } else if (err) {
+        return next(err);
+      }
+      next();
+    });
+  },
   async (req, res) => {
     const userId = req.user.id;
     const parentId = req.params.parentId || null;

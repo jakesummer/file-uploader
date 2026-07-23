@@ -1,5 +1,10 @@
 <%# New File %>
-<wa-dialog label="Upload New File" id="new-file-dialog" light-dismiss>
+<wa-dialog 
+  label="Upload New File" 
+  id="new-file-dialog" 
+  light-dismiss 
+  <%= fileSizeError ? "open" : "" %>
+>
   <form
     action="/item/create/file/<%= folderId %>"
     method="post"
@@ -8,7 +13,7 @@
   >
     <label for="new-file-input">Select File (Max 50MB):</label>
     <input type="file" name="file" id="new-file-input" required />
-    <p id="new-file-hint"></p>
+    <p id="new-file-hint"><%= fileSizeError ? `${fileSizeError}` : "" %></p>
   </form>
   <wa-button
     class="close-btn"
