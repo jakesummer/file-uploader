@@ -48,6 +48,29 @@ export async function createNewFolder(folderName, userId, parentId) {
   });
 }
 
+export async function createNewFile(
+  userId,
+  parentId,
+  fileName,
+  path,
+  mimeType,
+  size,
+) {
+  if (!path) throw new Error();
+
+  await prisma.item.create({
+    data: {
+      name: fileName,
+      type: "FILE",
+      path: path,
+      mimeType,
+      size,
+      userId: toNum(userId),
+      parentId: toNum(parentId),
+    },
+  });
+}
+
 export async function deleteItem(id) {
   return await prisma.item.delete({ where: { id: toNum(id) } });
 }
