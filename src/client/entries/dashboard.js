@@ -14,3 +14,15 @@ newFileDialog.addEventListener("wa-after-hide", () => newFileForm.reset());
 customElements.whenDefined("wa-tree-item").then(() => {
   document.querySelectorAll(".expanded").forEach((el) => (el.expanded = true));
 });
+
+document.addEventListener("click", (e) => {
+  const file = e.target.closest("wa-button.item[data-type='FILE']");
+  if (!file) return;
+
+  const { id, name, size, created } = file.dataset;
+
+  document.getElementById("dialog-file-name").textContent = name;
+  document.getElementById("dialog-file-size").textContent = size;
+  document.getElementById("dialog-file-created").textContent = created;
+  document.getElementById("dialog-download-btn").href = `/item/download/${id}`;
+});

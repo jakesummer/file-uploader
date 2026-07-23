@@ -6,14 +6,31 @@
 
 <% if (locals.items?.length > 0) { %>
   <% locals.items.forEach((item) => { %>
-    <wa-button appearance="outlined" href="/dashboard/<%= item.id %>" class="item">
+    <% const action =
+      item.type === "FOLDER"
+        ? `href=/dashboard/${item.id}`
+        : `data-dialog="open file-dialog"`;
+      const created = helpers.formatDate(item.createdAt);
+    %>
+    
+    <wa-button 
+      appearance="outlined" 
+      <%- action %> 
+      href="javascript:void(0);" 
+      class="item"
+      data-id="<%= item.id %>";
+      data-name="<%= item.name %>";
+      data-size="<%= item.size %>";
+      data-created="<%= created %>";
+      data-type="<%= item.type %>"
+    >
       <span class="item-grid">
         <span class="item-col-name">
           <wa-icon name="folder"></wa-icon>
           <p><%= item.name %></p>
         </span>
         <span class="item-col"><%= item.size || "--" %></span>
-        <span class="item-col"><%= helpers.formatDate(item.createdAt) %></span>
+        <span class="item-col"><%= created %></span>
       </span>
     </wa-button>
   <% }); %>
