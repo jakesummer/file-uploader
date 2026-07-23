@@ -1,0 +1,12 @@
+#file-dialog::part(footer) {
+  justify-content: space-between;
+}
+
+.file-dialog-footer-right {
+  display: flex;
+  gap: var(--wa-space-xs);
+}
+
+.close-btn:hover::part(base) {
+  background-color: var(--wa-color-neutral-20);
+}
