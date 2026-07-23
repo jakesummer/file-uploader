@@ -13,8 +13,8 @@ const fileHint = document.getElementById("new-file-hint");
 
 const MAX_FILE_SIZE_MB = 50;
 
-newFolderDialog.addEventListener("wa-after-hide", () => newFolderForm.reset());
-newFileDialog.addEventListener("wa-after-hide", () => newFileForm.reset());
+newFolderDialog.addEventListener("wa-show", () => newFolderForm.reset());
+newFileDialog.addEventListener("wa-show", () => newFileForm.reset());
 
 customElements.whenDefined("wa-tree-item").then(() => {
   document.querySelectorAll(".expanded").forEach((el) => (el.expanded = true));
