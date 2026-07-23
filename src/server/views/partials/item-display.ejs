@@ -11,6 +11,7 @@
         ? `href=/dashboard/${item.id}`
         : `data-dialog="open file-dialog"`;
       const created = helpers.formatDate(item.createdAt);
+      const size = item.size ? helpers.formatBytes(item.size) : "--";
     %>
     
     <wa-button 
@@ -20,7 +21,7 @@
       class="item"
       data-id="<%= item.id %>";
       data-name="<%= item.name %>";
-      data-size="<%= item.size %>";
+      data-size="<%= size %>";
       data-created="<%= created %>";
       data-type="<%= item.type %>"
     >
@@ -29,7 +30,7 @@
           <wa-icon name="folder"></wa-icon>
           <p><%= item.name %></p>
         </span>
-        <span class="item-col"><%= item.size || "--" %></span>
+        <span class="item-col"><%= size %></span>
         <span class="item-col"><%= created %></span>
       </span>
     </wa-button>
