@@ -1,6 +1,10 @@
 import multer from "multer";
 import path from "node:path";
-import { createNewFolder, deleteItem } from "../db/queries/itemQueries.js";
+import {
+  createNewFile,
+  createNewFolder,
+  deleteItem,
+} from "../db/queries/itemQueries.js";
 
 const __dirname = import.meta.dirname;
 const uploadPath = path.join(__dirname, "../../../uploads");
@@ -9,7 +13,13 @@ const upload = multer({ dest: uploadPath });
 export const createFilePost = [
   upload.single("file"),
   async (req, res) => {
-    console.log(req.file);
+    const userId = req.user.id;
+    const parentId = req.params.parentId || null;
+    const { originalname, path, mimetype, size } = req.file;
+
+    await createNewFile(userId, parentId, originalname, path, mimetype, size);
+
+    res.redirect(`/dashboard/${parentId || ""}`);
   },
 ];
 
