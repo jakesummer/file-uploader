@@ -24,6 +24,6 @@ document.addEventListener("click", (e) => {
   document.getElementById("dialog-file-name").textContent = name;
   document.getElementById("dialog-file-size").textContent = size;
   document.getElementById("dialog-file-created").textContent = created;
-  document.getElementById("dialog-delete-form").action = `/item/delete/${id}`;
+  document.getElementById("delete-file-form").action = `/item/delete/${id}`;
   document.getElementById("dialog-download-btn").href = `/item/download/${id}`;
 });

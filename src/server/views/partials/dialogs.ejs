@@ -50,7 +50,7 @@
     method="post"
     id="delete-folder-form"
   >
-    <p>Are you sure you want to delete this file and all of its contents?</p>
+    <p>Are you sure you want to delete this folder and all of its contents?</p>
   </form>
   <wa-button
     class="close-btn"
@@ -67,6 +67,32 @@
     slot="footer"
     >Delete</wa-button
   >
+</wa-dialog>
+
+<%# Delete File %>
+<wa-dialog label="Delete File" id="delete-file-dialog" light-dismiss>
+  <form action="#" method="post" id="delete-file-form">
+    <p>Are you sure you want to delete this file?</p>
+  </form>
+  <wa-button
+    class="close-btn"
+    appearance="outlined"
+    variant="neutral"
+    data-dialog="close"
+    slot="footer"
+    >Cancel</wa-button
+  >
+  <wa-button
+    type="submit"
+    form="delete-file-form"
+    variant="danger"
+    appearance="filled"
+    data-dialog="open delete-file-dialog"
+    slot="footer"
+  >
+    <wa-icon name="trash-can"></wa-icon>
+    Delete
+  </wa-button>
 </wa-dialog>
 
 <%# File Info %>
@@ -86,12 +112,14 @@
   >
 
   <div slot="footer" class="file-dialog-footer-right">
-    <form action="/item/delete" method="post" id="dialog-delete-form">
-      <wa-button type="submit" variant="danger" appearance="filled">
-        <wa-icon name="trash-can"></wa-icon>
-        Delete
-      </wa-button>
-    </form>
+    <wa-button
+      variant="danger"
+      appearance="filled"
+      data-dialog="open delete-file-dialog"
+    >
+      <wa-icon name="trash-can"></wa-icon>
+      Delete
+    </wa-button>
     <wa-button variant="brand" href="#" id="dialog-download-btn">
       <wa-icon name="download"></wa-icon>
       Download
