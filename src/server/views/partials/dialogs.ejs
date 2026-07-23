@@ -1,5 +1,5 @@
 <%# New File %>
-<wa-dialog label="Upload New File" id="new-file-dialog">
+<wa-dialog label="Upload New File" id="new-file-dialog" light-dismiss>
   <form
     action="/item/create/file/<%= folderId %>"
     method="post"
@@ -21,7 +21,7 @@
 </wa-dialog>
 
 <%# New Folder %>
-<wa-dialog label="Create New Folder" id="new-folder-dialog">
+<wa-dialog label="Create New Folder" id="new-folder-dialog" light-dismiss>
   <form
     action="/item/create/folder/<%= folderId %>"
     method="post"
@@ -42,7 +42,7 @@
 </wa-dialog>
 
 <%# Delete Folder %>
-<wa-dialog label="Delete Folder" id="delete-folder-dialog">
+<wa-dialog label="Delete Folder" id="delete-folder-dialog" light-dismiss>
   <form
     action="/item/delete/<%= folderId %>"
     method="post"
@@ -67,7 +67,7 @@
 </wa-dialog>
 
 <%# File Info %>
-<wa-dialog label="File Information" id="file-dialog">
+<wa-dialog label="File Information" id="file-dialog" light-dismiss>
   <div>
     <p><strong>Name:</strong> <span id="dialog-file-name"></span></p>
     <p><strong>Size:</strong> <span id="dialog-file-size"></span></p>
