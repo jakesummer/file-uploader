@@ -1,7 +1,7 @@
 <%# New File %>
 <wa-dialog label="Upload New File" id="new-file-dialog">
   <form
-    action="/item/create/file"
+    action="/item/create/file/<%= folderId %>"
     method="post"
     id="new-file-form"
     enctype="multipart/form-data"

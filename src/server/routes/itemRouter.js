@@ -5,7 +5,7 @@ const itemRouter = Router();
 
 itemRouter.post("/create/folder{/:parentId}", itemController.createFolderPost);
 
-itemRouter.post("/create/file{/parentId}", itemController.createFilePost);
+itemRouter.post("/create/file{/:parentId}", itemController.createFilePost);
 
 itemRouter.post("/delete/:id", itemController.deletePost);
 
