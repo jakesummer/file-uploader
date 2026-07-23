@@ -21,7 +21,7 @@ export async function getUserItems(userId, parentId = null) {
 }
 
 export async function getUserFolders(userId) {
-  return prisma.item.findMany({ where: { userId } });
+  return prisma.item.findMany({ where: { userId, type: "FOLDER" } });
 }
 
 export async function getItemById(id) {
