@@ -7,9 +7,6 @@ export async function dashboardGet(req, res) {
   const username = req.user.username;
   const folderId = req.params.folderId;
 
-  const fileSizeError = req.session?.fileSizeError || "";
-  delete req.session.fileSizeError;
-
   const breadcrumbs = await getBreadcrumbs(userId, folderId, username);
   const { tree, expandedFolderIds } = await getTree(
     userId,
@@ -23,6 +20,5 @@ export async function dashboardGet(req, res) {
     breadcrumbs,
     tree,
     expandedFolderIds,
-    fileSizeError,
   });
 }

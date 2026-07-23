@@ -49,3 +49,43 @@ fileInput.addEventListener("change", () => {
     }
   }
 });
+
+function uploadFile(file, folderId) {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const xhr = new XMLHttpRequest();
+
+  xhr.onload = () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      window.location.href = `/dashboard/${folderId}`;
+    } else {
+      let errMsg;
+      try {
+        errMsg = xhr.responseText;
+      } catch {
+        errMsg = "Something went wrong! Please try again!";
+      }
+      fileHint.textContent = errMsg;
+    }
+  };
+
+  xhr.open("POST", `/item/create/file/${folderId}`);
+  xhr.send(formData);
+}
+
+newFileForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (!newFileForm.checkValidity()) {
+    newFileForm.reportValidity();
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const folderId = newFileForm.dataset.folderId || "";
+
+  if (file) {
+    uploadFile(file, folderId);
+  }
+});

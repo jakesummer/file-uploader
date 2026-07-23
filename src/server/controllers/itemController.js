@@ -22,10 +22,11 @@ export const createFilePost = [
   (req, res, next) => {
     upload.single("file")(req, res, (err) => {
       if (err instanceof multer.MulterError) {
-        req.session.fileSizeError = `File exceeds the ${MAX_FILE_SIZE_MB}MB limit!`;
-        return res.status(400).redirect("/dashboard");
+        return res
+          .status(400)
+          .send(`File exceeds the ${MAX_FILE_SIZE_MB}MB limit!`);
       } else if (err) {
-        return next(err);
+        return res.status(400).send(err);
       }
       next();
     });
@@ -37,7 +38,7 @@ export const createFilePost = [
 
     await createNewFile(userId, parentId, originalname, path, mimetype, size);
 
-    res.redirect(`/dashboard/${parentId || ""}`);
+    res.send();
   },
 ];
 
