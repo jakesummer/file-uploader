@@ -84,8 +84,17 @@
     slot="footer"
     >Close</wa-button
   >
-  <wa-button variant="brand" href="#" slot="footer" id="dialog-download-btn">
-    <wa-icon name="download"></wa-icon>
-    Download
-  </wa-button>
+
+  <div slot="footer" class="file-dialog-footer-right">
+    <form action="/item/delete" method="post" id="dialog-delete-form">
+      <wa-button type="submit" variant="danger" appearance="filled">
+        <wa-icon name="trash-can"></wa-icon>
+        Delete
+      </wa-button>
+    </form>
+    <wa-button variant="brand" href="#" id="dialog-download-btn">
+      <wa-icon name="download"></wa-icon>
+      Download
+    </wa-button>
+  </div>
 </wa-dialog>
