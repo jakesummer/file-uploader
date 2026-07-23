@@ -50,3 +50,7 @@ main {
 wa-page::part(drawer__body) {
   padding-inline: 0;
 }
+
+.close-btn:hover::part(base) {
+  background-color: var(--wa-color-neutral-20);
+}
