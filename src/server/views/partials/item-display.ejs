@@ -6,12 +6,14 @@
 
 <% if (locals.items?.length > 0) { %>
   <% locals.items.forEach((item) => { %>
-    <% const action =
-      item.type === "FOLDER"
-        ? `href=/dashboard/${item.id}`
-        : `data-dialog="open file-dialog"`;
+    <% const type = item.type;
+      const action =
+        type === "FOLDER"
+          ? `href=/dashboard/${item.id}`
+          : `data-dialog="open file-dialog"`;
       const created = helpers.formatDate(item.createdAt);
       const size = item.size ? helpers.formatBytes(item.size) : "--";
+      const iconName = type === "FOLDER" ? "folder" : helpers.getFileIcon(item.mimeType);
     %>
     
     <wa-button 
@@ -23,11 +25,11 @@
       data-name="<%= item.name %>";
       data-size="<%= size %>";
       data-created="<%= created %>";
-      data-type="<%= item.type %>"
+      data-type="<%= type %>"
     >
       <span class="item-grid">
         <span class="item-col-name">
-          <wa-icon name="folder"></wa-icon>
+          <wa-icon name="<%= iconName %>"></wa-icon>
           <p><%= item.name %></p>
         </span>
         <span class="item-col"><%= size %></span>
