@@ -16,7 +16,7 @@
 <wa-tree>
   <% const rootSelected = folderId === undefined; %>
 
-  <wa-tree-item expanded>
+  <wa-tree-item expanded class="<%= rootSelected ? "selected" : "" %>">
     <a href="/dashboard"><%= tree.name %></a>
     <% buildTree(tree.children) %>
   </wa-tree-item>
