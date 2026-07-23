@@ -4,6 +4,7 @@ import {
   createNewFile,
   createNewFolder,
   deleteItem,
+  getFilePath,
 } from "../db/queries/itemQueries.js";
 
 const __dirname = import.meta.dirname;
@@ -38,4 +39,10 @@ export async function deletePost(req, res) {
   const parentId = deletedItem.parentId || "";
 
   res.redirect(`/dashboard/${parentId}`);
+}
+
+export async function downloadFileGet(req, res) {
+  const id = req.params.id;
+  const { name, path } = await getFilePath(id);
+  res.download(path, name);
 }

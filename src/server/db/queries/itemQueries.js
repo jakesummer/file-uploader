@@ -74,3 +74,13 @@ export async function createNewFile(
 export async function deleteItem(id) {
   return await prisma.item.delete({ where: { id: toNum(id) } });
 }
+
+export async function getFilePath(id) {
+  return prisma.item.findUnique({
+    where: { id: toNum(id) },
+    select: {
+      name: true,
+      path: true,
+    },
+  });
+}

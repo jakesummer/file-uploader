@@ -9,4 +9,6 @@ itemRouter.post("/create/file{/:parentId}", itemController.createFilePost);
 
 itemRouter.post("/delete/:id", itemController.deletePost);
 
+itemRouter.get("/download/:id", itemController.downloadFileGet);
+
 export default itemRouter;
