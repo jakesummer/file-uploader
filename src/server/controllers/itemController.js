@@ -1,13 +1,14 @@
 import upload from "../config/multer.js";
 import client from "../config/s3Client.js";
 import { MulterError } from "multer";
-import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { DeleteObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import {
   createNewFile,
   createNewFolder,
   deleteItem,
   getFilePath,
+  getItemById,
 } from "../db/queries/itemQueries.js";
 
 export const createFilePost = [
@@ -60,12 +61,22 @@ export async function createFolderPost(req, res) {
 
 export async function deletePost(req, res) {
   const id = req.params.id;
-  const deletedItem = await deleteItem(id);
-  const parentId = deletedItem.parentId || "";
+  const item = await getItemById(id);
+  const parentId = item.parentId || "";
 
-  const itemType =
-    deletedItem.type[0] + deletedItem.type.slice(1).toLowerCase();
-  req.session.alert = `Deleted ${itemType}: ${deletedItem.name}!`;
+  if (item.type == "FILE") {
+    const command = new DeleteObjectCommand({
+      Bucket: "uploads",
+      Key: item.path,
+    });
+
+    await client.send(command);
+  }
+
+  await deleteItem(id);
+
+  const itemType = item.type[0] + item.type.slice(1).toLowerCase();
+  req.session.alert = `Deleted ${itemType}: ${item.name}!`;
 
   res.redirect(`/dashboard/${parentId}`);
 }
