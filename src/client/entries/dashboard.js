@@ -15,7 +15,10 @@ const uploadProgressBar = document.getElementById("file-upload-progress");
 const MAX_FILE_SIZE_MB = 50;
 
 newFolderDialog.addEventListener("wa-show", () => newFolderForm.reset());
-newFileDialog.addEventListener("wa-show", () => newFileForm.reset());
+newFileDialog.addEventListener("wa-show", () => {
+  newFileForm.reset();
+  fileHint.textContent = "";
+});
 
 customElements.whenDefined("wa-tree-item").then(() => {
   document.querySelectorAll(".expanded").forEach((el) => (el.expanded = true));
