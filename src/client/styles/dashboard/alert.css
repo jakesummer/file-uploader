@@ -1,0 +1,29 @@
+#alert {
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(calc(100% + 2.5rem));
+
+  transition: transform, opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
+}
+
+#alert.shown {
+  pointer-events: all;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@starting-style {
+  #alert.shown {
+    opacity: 0;
+    transform: translateY(calc(100% + 2.5rem));
+  }
+}
+
+#close-alert-btn::part(base):hover {
+  background-color: transparent;
+}

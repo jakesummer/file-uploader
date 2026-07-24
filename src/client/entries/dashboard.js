@@ -3,6 +3,7 @@ import "../styles//dashboard/dashboard.css";
 import "../styles//dashboard/item.css";
 import "../styles//dashboard/tree.css";
 import "../styles//dashboard/dialogs.css";
+import "../styles//dashboard/alert.css";
 
 const newFolderDialog = document.getElementById("new-folder-dialog");
 const newFolderForm = document.getElementById("new-folder-form");
@@ -11,6 +12,8 @@ const newFileForm = document.getElementById("new-file-form");
 const fileInput = document.getElementById("new-file-input");
 const fileHint = document.getElementById("new-file-hint");
 const uploadProgressBar = document.getElementById("file-upload-progress");
+const alert = document.getElementById("alert");
+const closeAlertBtn = document.getElementById("close-alert-btn");
 
 const MAX_FILE_SIZE_MB = 50;
 
@@ -102,3 +105,5 @@ newFileForm.addEventListener("submit", (e) => {
     uploadFile(file, folderId);
   }
 });
+
+closeAlertBtn?.addEventListener("click", () => alert.classList.remove("shown"));
