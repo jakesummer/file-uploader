@@ -8,7 +8,9 @@
 
 <main><%- include("partials/item-display") %></main>
 
-<%- include("partials/alert") %>
+<% if (locals.alert) { %>
+  <%- include("partials/alert") %>
+<% } %>
 
 <%- include("partials/dialogs") %>
 
