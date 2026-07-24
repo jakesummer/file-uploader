@@ -20,3 +20,9 @@
     color: var(--wa-color-danger-60);
   }
 }
+
+#file-upload-progress {
+  align-self: center;
+  margin-top: var(--wa-space-m);
+  display: none;
+}

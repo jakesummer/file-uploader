@@ -10,6 +10,7 @@ const newFileDialog = document.getElementById("new-file-dialog");
 const newFileForm = document.getElementById("new-file-form");
 const fileInput = document.getElementById("new-file-input");
 const fileHint = document.getElementById("new-file-hint");
+const uploadProgressBar = document.getElementById("file-upload-progress");
 
 const MAX_FILE_SIZE_MB = 50;
 
@@ -56,6 +57,14 @@ function uploadFile(file, folderId) {
 
   const xhr = new XMLHttpRequest();
 
+  xhr.upload.addEventListener("progress", (e) => {
+    uploadProgressBar.style.display = "block";
+    if (e.lengthComputable) {
+      const progress = Math.round((e.loaded / e.total) * 100);
+      uploadProgressBar.value = progress;
+    }
+  });
+
   xhr.onload = () => {
     if (xhr.readyState === 4 && xhr.status === 200) {
       window.location.href = `/dashboard/${folderId}`;
@@ -67,6 +76,7 @@ function uploadFile(file, folderId) {
         errMsg = "Something went wrong! Please try again!";
       }
       fileHint.textContent = errMsg;
+      uploadProgressBar.style.display = "none";
     }
   };
 
