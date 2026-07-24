@@ -1,16 +1,14 @@
 import { getItemById } from "../db/queries/itemQueries.js";
 import NotFoundError from "../errors/NotFoundError.js";
 
-export default function authorizeOwner(paramName) {
-  return async (req, res, next) => {
-    const userId = req.user.id;
-    const itemId = req.params[paramName];
+export default async function authorizeOwner(req, res, next) {
+  const userId = req.user.id;
+  const itemId = req.params.parentId || req.params.id || req.params.folderId;
 
-    if (!itemId) return next();
+  if (!itemId) return next();
 
-    const item = await getItemById(itemId);
-    if (item?.userId !== userId) throw new NotFoundError();
+  const item = await getItemById(itemId);
+  if (item?.userId !== userId) throw new NotFoundError();
 
-    next();
-  };
+  next();
 }

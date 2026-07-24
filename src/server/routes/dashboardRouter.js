@@ -6,7 +6,7 @@ const dashboardRouter = Router();
 
 dashboardRouter.get(
   "/{:folderId}",
-  authorizeOwner("folderId"),
+  authorizeOwner,
   dashboardController.dashboardGet,
 );
 
