@@ -1,5 +1,5 @@
-import multer from "multer";
-import path from "node:path";
+import upload from "../config/multer.js";
+import { MulterError } from "multer";
 import {
   createNewFile,
   createNewFolder,
@@ -7,36 +7,35 @@ import {
   getFilePath,
 } from "../db/queries/itemQueries.js";
 
-const MAX_FILE_SIZE_MB = 50;
-
-const __dirname = import.meta.dirname;
-const uploadPath = path.join(__dirname, "../../../uploads");
-const upload = multer({
-  dest: uploadPath,
-  limits: {
-    fileSize: MAX_FILE_SIZE_MB * 1024 * 1024,
-  },
-});
-
 export const createFilePost = [
   (req, res, next) => {
     upload.single("file")(req, res, (err) => {
-      if (err instanceof multer.MulterError) {
+      if (err instanceof MulterError) {
+        return res.status(400).send(`File exceeds the 50MB limit!`);
+      } else if (err) {
+        console.log(err);
         return res
           .status(400)
-          .send(`File exceeds the ${MAX_FILE_SIZE_MB}MB limit!`);
-      } else if (err) {
-        return res.status(400).send(err);
+          .send("An unexpected error occurred while uploading your file!");
       }
+
+      if (!req.file) {
+        return res.status(400).send("Please upload a file!");
+      }
+
       next();
     });
   },
   async (req, res) => {
     const userId = req.user.id;
     const parentId = req.params.parentId || null;
-    const { originalname, path, mimetype, size } = req.file;
+    const { originalname, key, mimetype } = req.file;
+    const size =
+      req.file.size > 0
+        ? req.file.size
+        : parseInt(req.headers["content-length"] || "0", 10);
 
-    await createNewFile(userId, parentId, originalname, path, mimetype, size);
+    await createNewFile(userId, parentId, originalname, key, mimetype, size);
 
     req.session.alert = `Uploaded File: ${originalname}!`;
 
