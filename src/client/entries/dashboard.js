@@ -106,4 +106,12 @@ newFileForm.addEventListener("submit", (e) => {
   }
 });
 
-closeAlertBtn?.addEventListener("click", () => alert.classList.remove("shown"));
+if (alert) {
+  closeAlertBtn.addEventListener("click", () =>
+    alert.classList.remove("shown"),
+  );
+
+  setTimeout(() => {
+    alert.classList.remove("shown");
+  }, 5000);
+}
