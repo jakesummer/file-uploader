@@ -38,7 +38,7 @@ export const createFilePost = [
 
     await createNewFile(userId, parentId, originalname, path, mimetype, size);
 
-    req.session.alert = `File: ${originalname} successfully uploaded!`;
+    req.session.alert = `Uploaded File: ${originalname}!`;
 
     res.send();
   },
@@ -51,7 +51,7 @@ export async function createFolderPost(req, res) {
 
   await createNewFolder(folderName, userId, parentId);
 
-  req.session.alert = `Folder: ${folderName} successfully created!`;
+  req.session.alert = `Created Folder: ${folderName}!`;
 
   res.redirect(`/dashboard/${parentId || ""}`);
 }
@@ -63,7 +63,7 @@ export async function deletePost(req, res) {
 
   const itemType =
     deletedItem.type[0] + deletedItem.type.slice(1).toLowerCase();
-  req.session.alert = `${itemType}: ${deletedItem.name} successfully deleted!`;
+  req.session.alert = `Deleted ${itemType}: ${deletedItem.name}!`;
 
   res.redirect(`/dashboard/${parentId}`);
 }

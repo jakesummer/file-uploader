@@ -1,4 +1,7 @@
 #alert {
+  font-size: clamp(0.7rem, 3vw, 1rem);
+  max-width: 50vw;
+  z-index: 9999;
   position: fixed;
   bottom: 2.5rem;
   right: 2.5rem;
@@ -9,6 +12,25 @@
   transition: transform, opacity;
   transition-duration: 0.5s;
   transition-timing-function: ease-out;
+
+  &::part(message) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+#alert-text {
+  margin: 0;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 830px) {
+  #alert {
+    max-width: calc(100vw - 2.5rem - 2.5rem);
+  }
 }
 
 #alert.shown {
