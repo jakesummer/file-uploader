@@ -1,5 +1,8 @@
 import upload from "../config/multer.js";
+import client from "../config/s3Client.js";
 import { MulterError } from "multer";
+import { GetObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import {
   createNewFile,
   createNewFolder,
@@ -70,5 +73,14 @@ export async function deletePost(req, res) {
 export async function downloadFileGet(req, res) {
   const id = req.params.id;
   const { name, path } = await getFilePath(id);
-  res.download(path, name);
+
+  const command = new GetObjectCommand({
+    Bucket: "uploads",
+    Key: path,
+    ResponseContentDisposition: `attachment, filename=${name}`,
+  });
+
+  const signedUrl = await getSignedUrl(client, command, { expiresIn: 60 });
+
+  res.redirect(signedUrl);
 }
