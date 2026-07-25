@@ -27,13 +27,13 @@ model User {
 }
 
 model Item {
-  id        Int      @id @default(autoincrement())
-  name      String
-  type      ItemType
-  path      String?
-  mimeType  String?
-  createdAt DateTime @default(now())
-  size      Int?
+  id              Int      @id @default(autoincrement())
+  name            String
+  type            ItemType
+  storageLocation String?
+  mimeType        String?
+  createdAt       DateTime @default(now())
+  size            Int?
 
   parent   Item?  @relation("Parent", fields: [parentId], references: [id], onDelete: Cascade)
   parentId Int?

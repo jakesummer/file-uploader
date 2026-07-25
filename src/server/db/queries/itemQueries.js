@@ -52,17 +52,17 @@ export async function createNewFile(
   userId,
   parentId,
   fileName,
-  path,
+  storageLocation,
   mimeType,
   size,
 ) {
-  if (!path) throw new Error();
+  if (!storageLocation) throw new Error();
 
   await prisma.item.create({
     data: {
       name: fileName,
       type: "FILE",
-      path: path,
+      storageLocation: storageLocation,
       mimeType,
       size,
       userId: toNum(userId),
@@ -75,12 +75,12 @@ export async function deleteItem(id) {
   return await prisma.item.delete({ where: { id: toNum(id) } });
 }
 
-export async function getFilePath(id) {
+export async function getFileStorageLocation(id) {
   return prisma.item.findUnique({
     where: { id: toNum(id) },
     select: {
       name: true,
-      path: true,
+      storageLocation: true,
     },
   });
 }

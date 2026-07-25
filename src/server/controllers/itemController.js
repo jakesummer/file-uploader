@@ -7,7 +7,7 @@ import {
   createNewFile,
   createNewFolder,
   deleteItem,
-  getFilePath,
+  getFileStorageLocation,
   getItemById,
 } from "../db/queries/itemQueries.js";
 
@@ -67,7 +67,7 @@ export async function deletePost(req, res) {
   if (item.type == "FILE") {
     const command = new DeleteObjectCommand({
       Bucket: "uploads",
-      Key: item.path,
+      Key: item.storageLocation,
     });
 
     await client.send(command);
@@ -83,11 +83,11 @@ export async function deletePost(req, res) {
 
 export async function downloadFileGet(req, res) {
   const id = req.params.id;
-  const { name, path } = await getFilePath(id);
+  const { name, storageLocation } = await getFileStorageLocation(id);
 
   const command = new GetObjectCommand({
     Bucket: "uploads",
-    Key: path,
+    Key: storageLocation,
     ResponseContentDisposition: `attachment, filename=${name}`,
   });
 
