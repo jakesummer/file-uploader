@@ -11,6 +11,24 @@ const toNum = (val) => {
   return Number(val);
 };
 
+const getPath = async (parentId) => {
+  parentId = toNum(parentId);
+  let path = [];
+
+  if (parentId) {
+    const parent = await prisma.item.findUnique({
+      where: { id: parentId },
+      select: { path: true },
+    });
+
+    if (parent) {
+      path = [...parent.path, parentId];
+    }
+  }
+
+  return path;
+};
+
 export async function getUserItems(userId, parentId = null) {
   return prisma.item.findMany({
     where: {
@@ -38,10 +56,13 @@ export async function getFolderById(userId, folderId) {
 }
 
 export async function createNewFolder(folderName, userId, parentId) {
+  const path = await getPath(parentId);
+
   await prisma.item.create({
     data: {
       name: folderName,
       type: "FOLDER",
+      path,
       userId: toNum(userId),
       parentId: toNum(parentId),
     },
@@ -57,11 +78,13 @@ export async function createNewFile(
   size,
 ) {
   if (!storageLocation) throw new Error();
+  const path = await getPath(parentId);
 
   await prisma.item.create({
     data: {
       name: fileName,
       type: "FILE",
+      path,
       storageLocation: storageLocation,
       mimeType,
       size,

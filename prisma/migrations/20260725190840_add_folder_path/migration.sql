@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Item" ADD COLUMN     "path" INTEGER[] DEFAULT ARRAY[]::INTEGER[];
