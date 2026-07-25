@@ -52,6 +52,19 @@ export async function getFolderById(userId, folderId) {
       id: toNum(folderId),
       userId: toNum(userId),
     },
+    select: { id: true, name: true, path: true },
+  });
+}
+
+export async function getItemsByIds(userId, ids) {
+  if (!ids || ids.length === 0) return [];
+
+  return prisma.item.findMany({
+    where: {
+      id: { in: ids },
+      userId,
+    },
+    select: { id: true, name: true },
   });
 }
 

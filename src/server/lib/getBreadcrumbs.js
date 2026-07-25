@@ -1,24 +1,23 @@
-import { getFolderById } from "../db/queries/itemQueries.js";
+import { getFolderById, getItemsByIds } from "../db/queries/itemQueries.js";
 
 export default async function getBreadcrumbs(userId, folderId, username) {
-  const breadcrumbs = [];
+  const breadcrumbs = [{ id: "", name: username }]; // Root folder
 
-  let currentId = folderId;
+  if (!folderId) return breadcrumbs;
 
-  while (currentId) {
-    const item = await getFolderById(userId, currentId);
+  const folder = await getFolderById(userId, folderId);
 
-    if (!item) break;
+  if (!folder) return breadcrumbs;
 
-    breadcrumbs.unshift({
-      id: item.id,
-      name: item.name,
-    });
+  const pathIds = [...folder.path, folder.id];
 
-    currentId = item.parentId;
+  const items = await getItemsByIds(userId, pathIds);
+  const itemMap = new Map(items.map((i) => [i.id, i]));
+
+  for (const id of pathIds) {
+    const item = itemMap.get(id);
+    breadcrumbs.push({ id: item.id, name: item.name });
   }
-
-  breadcrumbs.unshift({ id: "", name: username }); // Root folder
 
   return breadcrumbs;
 }
