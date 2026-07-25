@@ -2,6 +2,8 @@ import Prisma from "@prisma/client/runtime/client";
 
 // eslint-disable-next-line no-unused-vars
 export default function errorHandler(err, req, res, next) {
+  console.log(err);
+
   let statusCode = err.statusCode || 500;
   let errorMessage = err.message;
 
