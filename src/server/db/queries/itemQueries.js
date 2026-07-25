@@ -68,6 +68,18 @@ export async function getItemsByIds(userId, ids) {
   });
 }
 
+export async function getFilesByAncestorId(ancestorId) {
+  const id = toNum(ancestorId);
+
+  return prisma.item.findMany({
+    where: {
+      type: "FILE",
+      OR: [{ id: id }, { path: { has: id } }],
+    },
+    select: { storageLocation: true },
+  });
+}
+
 export async function createNewFolder(folderName, userId, parentId) {
   const path = await getPath(parentId);
 
