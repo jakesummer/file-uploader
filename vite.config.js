@@ -6,7 +6,7 @@ export default defineConfig({
     emptyOutDir: true,
     rolldownOptions: {
       input: {
-        main: "src/client/entries/dashboard.js",
+        dashboard: "src/client/entries/dashboard.js",
         signUp: "src/client/entries/signUp.js",
         signIn: "src/client/entries/signIn.js",
         error: "src/client/entries/error.js",
