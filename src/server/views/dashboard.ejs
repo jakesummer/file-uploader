@@ -1,17 +1,42 @@
-<%- include("partials/header") %>
+<!DOCTYPE html>
+<html lang="en" class="wa-dark wa-theme-default wa-brand-yellow wa-warning-purple">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= locals.title ? `${title} - File Uploader` : "File Uploader" %></title>
+  <link rel="stylesheet" href="https://ka-f.webawesome.com/webawesome@3.10.0/styles/webawesome.css" />
+  <script type="module" src="https://ka-f.webawesome.com/webawesome@3.10.0/webawesome.loader.js"></script>
+  <%- include("partials/entry-loader", { entry: "dashboard"} ) %>
+</head>
+<body>
+  <wa-page>
+    <header slot="header">
+      <wa-button data-toggle-nav appearance="plain">
+        <wa-icon name="bars"></wa-icon>
+      </wa-button>
 
-<%- include("partials/sidebar") %>
+      <p>File Uploader</p>
 
-<div class="main-header" slot="main-header">
-  <%- include("partials/breadcrumbs") %>
-</div>
+      <form action="/sign-out" method="post">
+        <wa-button type="submit" appearance="plain" id="sign-out-btn">
+          <wa-icon name="arrow-right-from-bracket" label="sign out"></wa-icon>
+        </wa-button>
+      </form>
+    </header>
 
-<main><%- include("partials/item-display") %></main>
+    <%- include("partials/sidebar") %>
 
-<% if (locals.alert) { %>
-  <%- include("partials/alert") %>
-<% } %>
+    <div class="main-header" slot="main-header">
+      <%- include("partials/breadcrumbs") %>
+    </div>
 
-<%- include("partials/dialogs") %>
+    <main><%- include("partials/item-display") %></main>
 
-<%- include("partials/footer") %>
+    <% if (locals.alert) { %>
+      <%- include("partials/alert") %>
+    <% } %>
+
+    <%- include("partials/dialogs") %>
+    </wa-page>
+</body>
+</html>
