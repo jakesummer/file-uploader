@@ -12,6 +12,7 @@ import itemRouter from "./routes/itemRouter.js";
 import isAuthenticated from "./middleware/isAuthenticated.js";
 import * as ejsHelpers from "./utils/ejsHelpers.js";
 import errorHandler from "./middleware/errorHandler.js";
+import NotFoundError from "./errors/NotFoundError.js";
 import { PrismaSessionStore } from "@quixo3/prisma-session-store";
 
 const __dirname = import.meta.dirname;
@@ -52,6 +53,12 @@ app.use(authRouter);
 app.use("/dashboard", isAuthenticated, dashboardRouter);
 app.use("/item", isAuthenticated, itemRouter);
 app.use("/username", userRouter);
+
+app.use(ViteExpress.static());
+
+app.use((req, res, next) => {
+  next(new NotFoundError());
+});
 
 app.use(errorHandler);
 
