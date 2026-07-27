@@ -1,0 +1,26 @@
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= locals.title ? `${title} - File Uploader` : "File Uploader" %></title>
+  <link
+    rel="stylesheet"
+    href="https://ka-f.webawesome.com/webawesome@3.10.0/styles/webawesome.css"
+  />
+  <script
+    type="module"
+    src="https://ka-f.webawesome.com/webawesome@3.10.0/webawesome.loader.js"
+  ></script>
+  
+  <% if (isProd) { %>
+    <link rel="stylesheet" href="/assets/global.css" />
+    <% if (entry === "signIn" || entry === "signUp") { %>
+      <link rel="stylesheet" href="/assets/auth.css" />
+      <script type="module" src="/assets/<%= entry %>.js"></script>
+    <% } else { %>
+      <link rel="stylesheet" href="/assets/<%= entry %>.css" />
+      <script type="module" src="/assets/<%= entry %>.js"></script>
+    <% } %>
+  <% } else { %>
+    <script type="module" src="/src/client/entries/<%= entry %>.js"></script>
+  <% } %>
+</head>
